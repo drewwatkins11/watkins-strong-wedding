@@ -7,6 +7,11 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    colors: {
+      wheat: "#F1DCA7",
+      peach: "#D9AE94",
+      sage: "#9B9B7A",
+    },
     extend: {
       fontFamily: {
         bambi: ["var(--font-bambi)"],
