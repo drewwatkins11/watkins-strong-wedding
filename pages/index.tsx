@@ -97,8 +97,8 @@ export default function Home() {
             </button>
           </a>
 
-          <hr className="mb-6 mt-0 border-black w-4/12 mx-auto" />
-          <div className="prose prose-p:text-xl prose-p:text-black">
+          <div className="prose prose-p:text-xl prose-p:text-black mt-4">
+            <hr className="mb-6 mt-0 border-black w-4/12 mx-auto" />
             <p>
               <strong>The ceremony will start promptly at 3:30pm</strong>.
             </p>
