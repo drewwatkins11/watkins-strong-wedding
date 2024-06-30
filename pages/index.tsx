@@ -1,27 +1,88 @@
-import Nav from "@/components/nav";
+import Countdown from "@/components/countdown";
 import Image from "next/image";
+
+function SectionHeading({
+  color,
+  heading,
+}: {
+  color?: string;
+  heading: string;
+}) {
+  return (
+    <h2
+      className={`font-oyster text-8xl lg:text-8xl text-center lg:self-start lg:text-left mb-6 -mt-8 capitalize ${
+        color || "text-wheat"
+      }`}
+    >
+      {heading}
+    </h2>
+  );
+}
+
+const BodySection = ({
+  className,
+  children,
+  ...props
+}: React.ComponentPropsWithoutRef<"div">) => {
+  return (
+    <div
+      className={`flex flex-col items-center text-center w-full lg:text-center bg-sage lg:px-8 py-12 lg:p-24 ${
+        className && className
+      }`}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+};
 
 export default function Home() {
   return (
-    <main className={`flex min-h-screen flex-col items-center justify-between`}>
-      <div className="w-full items-center">
-        <div className="font-bambi">
-          <h1>Forever Awaits</h1>
-          <p>10.12.24</p>
+    <main className={`flex min-h-screen flex-col items-center`}>
+      <div
+        className="flex flex-col w-full items-end p-8 lg:p-24 bg-forest text-snow bg-cover bg-top lg:bg-left-top gap-6"
+        style={{ backgroundImage: `url('drew_ainsley_wedding.jpg')` }}
+      >
+        <div className="flex flex-col items-center w-full lg:w-2/3 gap-8">
+          <div className="text-shadow-xl shadow-green-950 flex flex-col items-center gap-4">
+            <div
+              className="lg:border-b-2 pb-4"
+              style={{
+                borderImage:
+                  "linear-gradient(90deg, #AE8625 -0.03%, #E0AA3E 37.97%, #F6D086 71.48%, #B88A44 99.98%) 1",
+              }}
+            >
+              <h1 className="font-oyster text-8xl inline-block text-parchment text-center lg:text-bigFix">
+                Forever Awaits
+              </h1>
+            </div>
+            <Image
+              src="/drew_ainsley_yard_cropped.png"
+              alt="Drew and Ainsley standing together"
+              width="1200"
+              height="1200"
+              className="shadow-xl lg:hidden"
+            />
+            <p className="text-2xl lg:text-4xl w-4/5 lg:w-2/3 pt-2 text-center font-montserrat font-extralight text-snow text-shadow-lg shadow-zinc-900">
+              Join Drew & Ainsley as they tie the knot on October 12th
+            </p>
+          </div>
+          <div className="w-11/12 lg:w-4/5 bg-parchment text-zinc-600  text-center pb-6 shadow-xl mt-4 lg:mt-0">
+            <h3 className="font-oyster text-wine text-5xl lg:text-7xl m-5 lg:my-5">
+              The countdown
+            </h3>
+            <Countdown />
+          </div>
         </div>
-        <Nav />
       </div>
 
-      <div
-        id="when"
-        className="mb-32 grid text-center lg:w-full lg:mb-0 lg:text-center bg-wheat p-24"
-      >
-        <h2 className="font-bambi text-8xl lg:text-left text-peach mb-8">
-          when
-        </h2>
-        <div className="text-black text-3xl">
+      <BodySection id="when">
+        <SectionHeading heading="when" />
+        <div>
           <strong>
-            <p>Saturday, October 12th, 2024</p>
+            <h3 className="font-oyster text-5xl">
+              Saturday, October 12th, 2024
+            </h3>
           </strong>
           <p>Ceremony: 3:30pm</p>
           <p>Reception: ~5:30pm</p>
@@ -30,15 +91,10 @@ export default function Home() {
             wedding for the full rundown.
           </p>
         </div>
-      </div>
+      </BodySection>
 
-      <div
-        id="where"
-        className="mb-32 grid text-center lg:w-full lg:mb-0 lg:text-center bg-sage p-24"
-      >
-        <h2 className="font-bambi text-8xl lg:text-left text-wheat mb-8">
-          where
-        </h2>
+      <BodySection id="where">
+        <SectionHeading heading="where" />
         <p>
           Wilderness Lodge
           <br />
@@ -46,89 +102,32 @@ export default function Home() {
           <br />
           Wattsburg, PA 16442
         </p>
-      </div>
+      </BodySection>
 
-      <div id="who">
+      <BodySection id="who">
+        <SectionHeading heading="who" />
         <div>
           <h2>Drew</h2>
         </div>
         <div>
           <h2>Ainsley</h2>
         </div>
-      </div>
+      </BodySection>
 
-      <div id="wear">Cocktail Attire</div>
-      <div id="what">registry</div>
+      <BodySection id="wear">
+        <SectionHeading heading="wear" />
+        <p className="text-5xl font-oyster">Cocktail attire</p>
+        <p className="text-xl w-4/5">
+          Join us for an elegant celebration under the open sky! While our venue
+          may be rustic, we're encouraging our guests to look dapper. Get ready
+          to celebrate in style amidst the charm of the outdoors on an early
+          October evening.
+        </p>
+      </BodySection>
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      <BodySection id="registry">
+        <SectionHeading heading="registry" />
+      </BodySection>
     </main>
   );
 }

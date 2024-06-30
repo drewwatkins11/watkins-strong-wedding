@@ -1,4 +1,7 @@
+/** @type {import('tailwindcss').Config} */
+
 import type { Config } from "tailwindcss";
+const plugin = require("tailwindcss/plugin");
 
 const config: Config = {
   content: [
@@ -7,14 +10,34 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    colors: {
-      wheat: "#F1DCA7",
-      peach: "#D9AE94",
-      sage: "#9B9B7A",
+    borderColor: ({ theme }) => ({
+      DEFAULT: theme("colors.gray.300", "currentColor"),
+    }),
+    textShadow: {
+      sm: "1px 1px 2px var(--tw-shadow-color)",
+      DEFAULT: "2px 2px 4px var(--tw-shadow-color)",
+      lg: "4px 4px 8px var(--tw-shadow-color)",
+      xl: "4px 4px 16px var(--tw-shadow-color)",
     },
     extend: {
+      fontSize: {
+        mobFix: "130px",
+        bigFix: "150px",
+      },
       fontFamily: {
         bambi: ["var(--font-bambi)"],
+        rabbit: ["var(--font-rabbit)"],
+        oyster: ["var(--font-oyster)"],
+        montserrat: ["var(--font-montserrat)"],
+      },
+      colors: {
+        wheat: "#F1DCA7",
+        parchment: "#F1E9D2",
+        peach: "#D9AE94",
+        sage: "#9B9B7A",
+        wine: "#562D36",
+        white: "#fff",
+        snow: "#EBEBEB",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -23,6 +46,17 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          "text-shadow": (value: string) => ({
+            textShadow: value,
+          }),
+        },
+        { values: theme("textShadow") }
+      );
+    }),
+  ],
 };
 export default config;
