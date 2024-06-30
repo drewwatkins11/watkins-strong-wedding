@@ -20,14 +20,14 @@ const countdownList: CountdownListItem[] = [
   {
     title: "Finalizing Plans",
     preDescription:
-      "While we continue planning, letting us know your RSVP will help us finalize the guest list.",
+      "Letting us know your RSVP by September 7th will help us finalize our plans.",
     description:
       "We're a few weeks out and the plans and the guest list have all been finalized. \n\n You should also have your hotel and travel plans set if you haven't yet.",
     complete: false,
     showPreDescription: false,
     revealType: "date",
-    revealDate: new Date("September 15, 2024"),
-    dateFormat: { month: "long" },
+    revealDate: new Date("September 7, 2024"),
+    dateFormat: { month: "long", day: "numeric" },
   },
   {
     title: "Getting close!",
