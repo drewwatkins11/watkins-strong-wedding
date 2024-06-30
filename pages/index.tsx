@@ -1,5 +1,7 @@
 import Countdown from "@/components/countdown";
 import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendar } from "@fortawesome/free-regular-svg-icons";
 
 function SectionHeading({
   color,
@@ -10,7 +12,7 @@ function SectionHeading({
 }) {
   return (
     <h2
-      className={`font-oyster text-8xl lg:text-8xl text-center lg:self-start lg:text-left mb-6 -mt-8 capitalize ${
+      className={`font-oyster text-8xl lg:text-9xl text-center lg:self-start lg:text-left mb-6 -mt-8 capitalize text-shadow-sm shadow-zinc-600 ${
         color || "text-wheat"
       }`}
     >
@@ -26,7 +28,7 @@ const BodySection = ({
 }: React.ComponentPropsWithoutRef<"div">) => {
   return (
     <div
-      className={`flex flex-col items-center text-center w-full lg:text-center bg-parchment lg:px-8 py-12 lg:p-24 ${
+      className={`flex flex-col items-center text-center w-full lg:text-center bg-parchment lg:px-8 py-12 lg:p-24  bg-gradient-to-b from-transparent from-50% to-transparent-15 ${
         className && className
       }`}
       {...props}
@@ -67,7 +69,7 @@ export default function Home() {
               Join Drew & Ainsley as they tie the knot on October 12th
             </p>
           </div>
-          <div className="w-11/12 lg:w-4/5 bg-parchment text-zinc-600  text-center pb-6 shadow-xl mt-4 lg:mt-0">
+          <div className="w-11/12 lg:w-4/5 bg-parchment text-zinc-600 text-center pb-6 shadow-xl mt-4 lg:mt-0">
             <h3 className="font-oyster text-wine text-5xl lg:text-7xl m-5 lg:my-5">
               The countdown
             </h3>
@@ -78,22 +80,48 @@ export default function Home() {
 
       <BodySection id="when" className="bg-sage">
         <SectionHeading heading="when" />
-        <div>
-          <strong>
-            <h3 className="font-oyster text-4xl lg:text-5xl">
-              Saturday, October 12th, 2024
-            </h3>
-          </strong>
-          <p>Ceremony: 3:30pm</p>
-          <p>Reception: ~5:30pm</p>
-          <p className="text-xl">
-            *We're still finalizing the schedule. Check back closer to the
-            wedding for the full rundown.
-          </p>
+        <div className="w-11/12 flex flex-col items-center lg:-mt-6">
+          <p className="italic">Our wedding is to be held on:</p>
+          <h3 className="font-oyster text-4xl lg:text-7xl mt-2 mb-4 text-deepGreen">
+            Saturday, October 12th, 2024
+          </h3>
+          <a
+            href="/drew_ainsley_wedding_events.ics"
+            download="drew_ainsley_wedding_events.ics"
+          >
+            <button className="rounded-full py-2 px-2 pr-3 mb-6 text-sm border border-black font-semibold hover:scale-110 transition-all">
+              <i className="rounded-full bg-deepGreen p-1 px-2 mr-2">
+                <FontAwesomeIcon icon={faCalendar} className="text-parchment" />
+              </i>
+              save to my calendar
+            </button>
+          </a>
+
+          <hr className="mb-6 mt-0 border-black w-4/12 mx-auto" />
+          <div className="prose prose-p:text-xl prose-p:text-black">
+            <p>
+              <strong>The ceremony will start promptly at 3:30pm</strong>.
+            </p>
+            <p>
+              Please arrive with enough time to park and walk to the ceremony.
+              The ~200 yard walk will take between 5-15 minutes.
+              <br />
+              <strong>We recommend arriving by 3pm.</strong>
+            </p>
+            <p>
+              A cocktail hour will follow the ceremony. We expect the reception
+              to start around 5:30pm and the party will go late into the night.
+            </p>
+            <hr className="mb-6 mt-0 border-black w-4/12 mx-auto" />
+            <p className="!text-base !font-semibold">
+              *We'll fill this section in with more details as we finalize the
+              plans. Check back in August for a more detailed schedule.
+            </p>
+          </div>
         </div>
       </BodySection>
 
-      <BodySection id="where" className="bg-burntOrange text-parchment">
+      <BodySection id="where" className="!bg-ember text-parchment">
         <SectionHeading heading="where" />
         <p>
           Wilderness Lodge

@@ -10,9 +10,6 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    borderColor: ({ theme }) => ({
-      DEFAULT: theme("colors.gray.300", "currentColor"),
-    }),
     textShadow: {
       sm: "1px 1px 2px var(--tw-shadow-color)",
       DEFAULT: "2px 2px 4px var(--tw-shadow-color)",
@@ -42,6 +39,7 @@ const config: Config = {
         burntOrange: "#a44200",
         ember: "#8f250c",
         wine: "#562D36",
+        "transparent-15": "rgba(0,0,0,.15)",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -52,6 +50,9 @@ const config: Config = {
   },
   plugins: [
     require("@tailwindcss/typography"),
+    require("tailwind-fontawesome")({
+      version: 6,
+    }),
     plugin(function ({ matchUtilities, theme }) {
       matchUtilities(
         {
