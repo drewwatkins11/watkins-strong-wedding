@@ -53,6 +53,7 @@ const config: Config = {
     require("tailwind-fontawesome")({
       version: 6,
     }),
+    // @ts-ignore
     plugin(function ({ matchUtilities, theme }) {
       matchUtilities(
         {

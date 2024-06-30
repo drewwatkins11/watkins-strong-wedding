@@ -2,6 +2,7 @@ import Countdown from "@/components/countdown";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-regular-svg-icons";
+import WhereContent from "@/components/WhereContent";
 
 function SectionHeading({
   color,
@@ -115,8 +116,8 @@ export default function Home() {
             </p>
             <hr className="mb-6 mt-0 border-black w-4/12 mx-auto" />
             <p className="!text-base !font-semibold">
-              *We'll fill this section in with more details as we finalize the
-              plans. Check back in August for a more detailed schedule.
+              *We&apos;ll add a few more details as we finalize the plans. Check
+              back in August for a more detailed schedule.
             </p>
           </div>
         </div>
@@ -124,13 +125,7 @@ export default function Home() {
 
       <BodySection id="where" className="!bg-ember text-parchment">
         <SectionHeading heading="where" />
-        <p>
-          Wilderness Lodge
-          <br />
-          13448 Weeks Valley Rd
-          <br />
-          Wattsburg, PA 16442
-        </p>
+        <WhereContent />
       </BodySection>
 
       <BodySection id="who" className="bg-parchment">
@@ -149,9 +144,9 @@ export default function Home() {
           <h3 className="text-5xl font-oyster">Cocktail attire</h3>
           <p>
             Join us for an elegant celebration under the open sky! While our
-            venue may be rustic, we're encouraging our guests to look dapper.
-            Get ready to celebrate in style amidst the charm of the outdoors on
-            an early October evening.
+            venue may be rustic, we&apos;re encouraging our guests to look
+            dapper. Get ready to celebrate in style amidst the charm of the
+            outdoors on an early October evening.
           </p>
           <p className="!font-bold">
             To put it simply, plan on wearing{" "}
@@ -204,8 +199,8 @@ export default function Home() {
           </p>
           <p>
             The lodge will be open and we&apos;ll have a couple fires going in
-            the evening, so we should be able to manage whatever Penn's fickle
-            woods throws our way.
+            the evening, so we should be able to manage whatever Penn&apos;s
+            fickle woods throws our way.
           </p>
         </div>
       </BodySection>
