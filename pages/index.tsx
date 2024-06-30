@@ -88,8 +88,9 @@ export default function Home() {
           <a
             href="/drew_ainsley_wedding_events.ics"
             download="drew_ainsley_wedding_events.ics"
+            className="mb-4"
           >
-            <button className="rounded-full py-2 px-2 pr-3 mb-6 text-sm border border-black font-semibold hover:scale-110 transition-all">
+            <button className="rounded-full py-2 px-2 pr-3 text-sm border border-black font-semibold hover:scale-110 transition-all hover:shadow-lg hover:bg-wheat">
               <i className="rounded-full bg-deepGreen p-1 px-2 mr-2">
                 <FontAwesomeIcon icon={faCalendar} className="text-parchment" />
               </i>
