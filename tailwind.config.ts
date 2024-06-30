@@ -40,7 +40,7 @@ const config: Config = {
         darkGreen: "#3a5a40",
         deepGreen: "#1b4332",
         burntOrange: "#a44200",
-        burgundy: "#8f250c",
+        ember: "#8f250c",
         wine: "#562D36",
       },
       backgroundImage: {

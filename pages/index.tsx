@@ -26,7 +26,7 @@ const BodySection = ({
 }: React.ComponentPropsWithoutRef<"div">) => {
   return (
     <div
-      className={`flex flex-col items-center text-center w-full lg:text-center bg-sage lg:px-8 py-12 lg:p-24 ${
+      className={`flex flex-col items-center text-center w-full lg:text-center bg-parchment lg:px-8 py-12 lg:p-24 ${
         className && className
       }`}
       {...props}
@@ -76,7 +76,7 @@ export default function Home() {
         </div>
       </div>
 
-      <BodySection id="when">
+      <BodySection id="when" className="bg-sage">
         <SectionHeading heading="when" />
         <div>
           <strong>
@@ -93,7 +93,7 @@ export default function Home() {
         </div>
       </BodySection>
 
-      <BodySection id="where">
+      <BodySection id="where" className="bg-burntOrange text-parchment">
         <SectionHeading heading="where" />
         <p>
           Wilderness Lodge
@@ -104,8 +104,8 @@ export default function Home() {
         </p>
       </BodySection>
 
-      <BodySection id="who">
-        <SectionHeading heading="who" />
+      <BodySection id="who" className="bg-parchment">
+        <SectionHeading heading="who" color="text-black" />
         <div>
           <h2>Drew</h2>
         </div>
@@ -116,7 +116,7 @@ export default function Home() {
 
       <BodySection id="wear" className="!bg-wine">
         <SectionHeading heading="wear" color="text-wheat" />
-        <div className="w-5/6 lg:w-3/5 prose prose-headings:text-wheat prose-p:text-snow prose-p:font-light prose-xl">
+        <div className="w-5/6 lg:w-4/5 prose prose-headings:text-wheat prose-p:text-snow prose-p:font-light prose-xl prose-headings:mb-3 prose-p:font-montserrat">
           <h3 className="text-5xl font-oyster">Cocktail attire</h3>
           <p>
             Join us for an elegant celebration under the open sky! While our
@@ -133,15 +133,38 @@ export default function Home() {
               cocktail attire.
             </a>
           </p>
+          <div className="flex flex-row flex-wrap items-center justify-center gap-8 mt-10 w-full prose-img:m-0">
+            <Image
+              src="/cocktail_attire_2.jpeg"
+              alt="Cocktail attire example"
+              width={400}
+              height={300}
+              className="rounded-2xl shadow-xl w-full lg:w-5/12"
+            />
+            <Image
+              src="/cocktail_attire_1.webp"
+              alt="Cocktail attire example"
+              width={400}
+              height={300}
+              className="rounded-2xl shadow-xl w-2/5 lg:w-1/5"
+            />
+            <Image
+              src="/cocktail_attire_3.jpg"
+              alt="Cocktail attire example"
+              width={400}
+              height={300}
+              className="rounded-2xl shadow-xl w-2/5 lg:w-3/12"
+            />
+          </div>
           <h3 className="text-5xl font-oyster">yet... Dress for the Weather</h3>
           <p>
             Even though we hope to have a beautiful outdoor wedding, it{" "}
             <i>is</i> autumn in Pennsylvania. Some rain in always possible and a
             crisp evening is likely.{" "}
-            <span className="font-bold">
+            <span className="font-semibold">
               The walk from from the parking lot to the ceremony is ~200 yards
-              through a field. If it's been raining, the ground could be a bit
-              muddy.
+              through a field. If it&apos;s rained recently, the ground could be
+              a bit muddy.
             </span>
           </p>
           <p>
@@ -156,33 +179,10 @@ export default function Home() {
             woods throws our way.
           </p>
         </div>
-        <div className="flex flex-row flex-wrap items-center justify-center gap-8 mt-10 w-4/5">
-          <Image
-            src="/cocktail_attire_2.jpeg"
-            alt="Cocktail attire example"
-            width={400}
-            height={300}
-            className="rounded-2xl shadow-xl w-full lg:w-2/6"
-          />
-          <Image
-            src="/cocktail_attire_1.webp"
-            alt="Cocktail attire example"
-            width={400}
-            height={300}
-            className="rounded-2xl shadow-xl w-2/5 lg:w-1/6"
-          />
-          <Image
-            src="/cocktail_attire_3.jpg"
-            alt="Cocktail attire example"
-            width={400}
-            height={300}
-            className="rounded-2xl shadow-xl w-2/5 lg:w-1/5"
-          />
-        </div>
       </BodySection>
 
-      <BodySection id="registry">
-        <SectionHeading heading="registry" />
+      <BodySection id="registry" className="bg-wheat">
+        <SectionHeading heading="registry" color="text-ember" />
       </BodySection>
     </main>
   );
