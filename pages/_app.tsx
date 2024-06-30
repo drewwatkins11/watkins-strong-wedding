@@ -31,7 +31,7 @@ const montserratFont = Montserrat({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <main
-      className={`${bambiFont.variable} ${yellowRabbitFont.variable} ${halloOysterFont.variable} ${quicksandFont.variable} ${montserratFont.variable} text-black`}
+      className={`${bambiFont.variable} ${yellowRabbitFont.variable} ${halloOysterFont.variable} ${quicksandFont.variable} ${montserratFont.variable} text-xl text-black`}
     >
       <Component {...pageProps} />
     </main>

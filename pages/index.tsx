@@ -63,7 +63,7 @@ export default function Home() {
               height="1200"
               className="shadow-xl lg:hidden"
             />
-            <p className="text-2xl lg:text-4xl w-4/5 lg:w-2/3 pt-2 text-center font-montserrat font-extralight text-snow text-shadow-lg shadow-zinc-900">
+            <p className="text-2xl lg:text-4xl w-4/5 pt-2 text-center font-montserrat font-extralight text-snow text-shadow-lg shadow-zinc-900">
               Join Drew & Ainsley as they tie the knot on October 12th
             </p>
           </div>
@@ -80,7 +80,7 @@ export default function Home() {
         <SectionHeading heading="when" />
         <div>
           <strong>
-            <h3 className="font-oyster text-5xl">
+            <h3 className="font-oyster text-4xl lg:text-5xl">
               Saturday, October 12th, 2024
             </h3>
           </strong>
@@ -114,15 +114,71 @@ export default function Home() {
         </div>
       </BodySection>
 
-      <BodySection id="wear">
-        <SectionHeading heading="wear" />
-        <p className="text-5xl font-oyster">Cocktail attire</p>
-        <p className="text-xl w-4/5">
-          Join us for an elegant celebration under the open sky! While our venue
-          may be rustic, we're encouraging our guests to look dapper. Get ready
-          to celebrate in style amidst the charm of the outdoors on an early
-          October evening.
-        </p>
+      <BodySection id="wear" className="!bg-wine">
+        <SectionHeading heading="wear" color="text-wheat" />
+        <div className="w-5/6 lg:w-3/5 prose prose-headings:text-wheat prose-p:text-snow prose-p:font-light prose-xl">
+          <h3 className="text-5xl font-oyster">Cocktail attire</h3>
+          <p>
+            Join us for an elegant celebration under the open sky! While our
+            venue may be rustic, we're encouraging our guests to look dapper.
+            Get ready to celebrate in style amidst the charm of the outdoors on
+            an early October evening.
+          </p>
+          <p className="!font-bold">
+            To put it simply, plan on wearing{" "}
+            <a
+              href="https://www.loveyouwedding.com/wedding-cocktail-attire/"
+              className="underline text-peach"
+            >
+              cocktail attire.
+            </a>
+          </p>
+          <h3 className="text-5xl font-oyster">yet... Dress for the Weather</h3>
+          <p>
+            Even though we hope to have a beautiful outdoor wedding, it{" "}
+            <i>is</i> autumn in Pennsylvania. Some rain in always possible and a
+            crisp evening is likely.{" "}
+            <span className="font-bold">
+              The walk from from the parking lot to the ceremony is ~200 yards
+              through a field. If it's been raining, the ground could be a bit
+              muddy.
+            </span>
+          </p>
+          <p>
+            It&apos;s a good idea to bring a jacket to keep warm in the evening.
+            We also recommend bringing along a pair of flats or comfortable
+            shoes to make the walk easier. (Or just rock some smart-looking
+            boots!)
+          </p>
+          <p>
+            The lodge will be open and we&apos;ll have a couple fires going in
+            the evening, so we should be able to manage whatever Penn's fickle
+            woods throws our way.
+          </p>
+        </div>
+        <div className="flex flex-row flex-wrap items-center justify-center gap-8 mt-10 w-4/5">
+          <Image
+            src="/cocktail_attire_2.jpeg"
+            alt="Cocktail attire example"
+            width={400}
+            height={300}
+            className="rounded-2xl shadow-xl w-full lg:w-2/6"
+          />
+          <Image
+            src="/cocktail_attire_1.webp"
+            alt="Cocktail attire example"
+            width={400}
+            height={300}
+            className="rounded-2xl shadow-xl w-2/5 lg:w-1/6"
+          />
+          <Image
+            src="/cocktail_attire_3.jpg"
+            alt="Cocktail attire example"
+            width={400}
+            height={300}
+            className="rounded-2xl shadow-xl w-2/5 lg:w-1/5"
+          />
+        </div>
       </BodySection>
 
       <BodySection id="registry">

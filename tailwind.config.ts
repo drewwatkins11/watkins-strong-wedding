@@ -31,13 +31,17 @@ const config: Config = {
         montserrat: ["var(--font-montserrat)"],
       },
       colors: {
-        wheat: "#F1DCA7",
-        parchment: "#F1E9D2",
-        peach: "#D9AE94",
-        sage: "#9B9B7A",
-        wine: "#562D36",
         white: "#fff",
         snow: "#EBEBEB",
+        parchment: "#F1E9D2",
+        wheat: "#f1dca7",
+        peach: "#D9AE94",
+        sage: "#9B9B7A",
+        darkGreen: "#3a5a40",
+        deepGreen: "#1b4332",
+        burntOrange: "#a44200",
+        burgundy: "#8f250c",
+        wine: "#562D36",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -47,6 +51,7 @@ const config: Config = {
     },
   },
   plugins: [
+    require("@tailwindcss/typography"),
     plugin(function ({ matchUtilities, theme }) {
       matchUtilities(
         {
