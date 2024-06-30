@@ -38,7 +38,7 @@ const BodySection = ({
 
 export default function Home() {
   return (
-    <main className={`flex min-h-screen flex-col items-center`}>
+    <main className={`flex min-h-screen flex-col items-center font-montserrat`}>
       <div
         className="flex flex-col w-full items-end p-8 lg:p-24 bg-forest text-snow bg-cover bg-top lg:bg-left-top gap-6"
         style={{ backgroundImage: `url('drew_ainsley_wedding.jpg')` }}

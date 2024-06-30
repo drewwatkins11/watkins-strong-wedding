@@ -2,7 +2,7 @@ const countdownList: CountdownListItem[] = [
   {
     title: "Planning",
     description:
-      "Save the dates have been sent! We're working out a few more details before sending out invites.",
+      "We're working out a few more details before sending out invites.",
     complete: true,
     revealType: "string",
     revealString: "now",
@@ -12,7 +12,8 @@ const countdownList: CountdownListItem[] = [
     preDescription: "Invites will start going out in a couple weeks.",
     description:
       "Our invites have been sent and most of the details have been finalized. Put on your dancing shoes and let us know your RSVP!",
-    complete: true,
+    complete: false,
+    showPreDescription: true,
     revealType: "string",
     revealString: "mid-July",
   },
@@ -23,6 +24,7 @@ const countdownList: CountdownListItem[] = [
     description:
       "We're a few weeks out and the plans and the guest list have all been finalized. \n\n You should also have your hotel and travel plans set if you haven't yet.",
     complete: false,
+    showPreDescription: false,
     revealType: "date",
     revealDate: new Date("September 15, 2024"),
     dateFormat: { month: "long" },
@@ -92,9 +94,9 @@ export default function Countdown() {
           >
             {stage.title}
           </h2>
-          {!stage.complete && stage.preDescription && (
-            <p>{stage.preDescription}</p>
-          )}
+          {!stage.complete &&
+            stage.preDescription &&
+            stage.showPreDescription !== false && <p>{stage.preDescription}</p>}
           <p>{stage.complete && stage.description}</p>
         </li>
       ))}
@@ -106,6 +108,7 @@ interface CountdownListItemBase {
   title: string;
   complete: boolean;
   preDescription?: string;
+  showPreDescription?: boolean;
   description?: string;
   revealType: "date" | "string";
 }
