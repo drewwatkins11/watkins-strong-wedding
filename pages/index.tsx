@@ -122,7 +122,7 @@ export default function Home() {
             <hr className="mb-6 mt-0 border-black w-4/12 mx-auto" />
             <p className="!text-base !font-semibold">
               *We&apos;ll add a few more details as we finalize the plans. Check
-              back in August for a more detailed schedule.
+              back in September for a more detailed schedule.
             </p>
           </div>
         </div>

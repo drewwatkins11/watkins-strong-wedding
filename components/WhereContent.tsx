@@ -129,7 +129,7 @@ export default function WhereContent() {
         </p>
         <hr className="mb-6 my-6 border-wheat w-6/12 mx-auto" />
         <p className="lg:w-4/5 mx-auto">
-          The ceremony will be held in the &ldquo;schooyard&rdquo; - a clearing
+          The ceremony will be held in the &ldquo;schoolyard&rdquo; - a clearing
           just inside the woodline (looking West from the lodge). It&apos;s
           roughly a 200 yard walk.
         </p>
