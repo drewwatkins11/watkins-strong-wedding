@@ -83,7 +83,10 @@ export default function Home() {
 
       <BodySection id="when" className="bg-sage">
         <SectionHeading heading="when" />
-        <div className="w-11/12 flex flex-col items-center lg:-mt-6">
+        <div
+          className="w-11/12 flex flex-col items-center lg:-mt-6"
+          style={{ maxWidth: "1600px" }}
+        >
           <p className="italic">Our wedding is to be held on:</p>
           <h3 className="font-oyster text-4xl lg:text-7xl mt-2 mb-4 text-deepGreen">
             Saturday, October 12th, 2024
@@ -127,17 +130,24 @@ export default function Home() {
 
       <BodySection id="where" className="!bg-ember text-parchment">
         <SectionHeading heading="where" />
-        <WhereContent />
+        <div style={{ maxWidth: "1600px" }}>
+          <WhereContent />
+        </div>
       </BodySection>
 
       <BodySection id="who" className="bg-parchment">
         <SectionHeading heading="who" color="text-black" />
-        <WhoContent />
+        <div style={{ maxWidth: "1600px" }}>
+          <WhoContent />
+        </div>
       </BodySection>
 
       <BodySection id="wear" className="!bg-wine">
         <SectionHeading heading="wear" color="text-wheat" />
-        <div className="w-5/6 lg:w-4/5 prose prose-headings:text-wheat prose-p:text-snow prose-p:font-light prose-xl prose-headings:mb-3 prose-p:font-montserrat">
+        <div
+          className="w-5/6 lg:w-4/5 prose prose-headings:text-wheat prose-p:text-snow prose-p:font-light prose-xl prose-headings:mb-3 prose-p:font-montserrat"
+          style={{ maxWidth: "1600px;" }}
+        >
           <h3 className="text-5xl font-oyster">Cocktail attire</h3>
           <p>
             Join us for an elegant celebration under the open sky! While our
@@ -202,8 +212,11 @@ export default function Home() {
         </div>
       </BodySection>
 
-      <BodySection id="registry" className="bg-wheat">
+      <BodySection id="registry" className="bg-wheat !pb-0 !px-0">
         <SectionHeading heading="registry" color="text-ember" />
+        <div style={{ maxWidth: "1600px" }}>
+          <RegistryContent />
+        </div>
       </BodySection>
     </main>
   );
