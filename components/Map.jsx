@@ -1,12 +1,8 @@
 import Head from "next/head";
 import Map, { Marker } from "react-map-gl";
 
-export default function MapOutput({
-  mapCenter,
-  markers,
-  mapStyle,
-  initialViewState,
-}) {
+export default function MapOutput(props) {
+  const { mapCenter, markers, mapStyle, initialViewState } = props;
   return (
     <>
       <Head>
