@@ -30,6 +30,7 @@ const config: Config = {
       colors: {
         white: "#fff",
         snow: "#EBEBEB",
+        latte: "#F5F0E0",
         parchment: "#F1E9D2",
         wheat: "#f1dca7",
         peach: "#D9AE94",

@@ -3,6 +3,8 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-regular-svg-icons";
 import WhereContent from "@/components/WhereContent";
+import WhoContent from "@/components/WhoContent";
+import RegistryContent from "@/components/RegistryContent";
 
 function SectionHeading({
   color,
@@ -130,12 +132,7 @@ export default function Home() {
 
       <BodySection id="who" className="bg-parchment">
         <SectionHeading heading="who" color="text-black" />
-        <div>
-          <h2>Drew</h2>
-        </div>
-        <div>
-          <h2>Ainsley</h2>
-        </div>
+        <WhoContent />
       </BodySection>
 
       <BodySection id="wear" className="!bg-wine">
