@@ -8,7 +8,7 @@ export default function RegistryContent() {
 
   return (
     <>
-      <p className="font-semibold font-montserrat text-2xl my-12 p-8 bg-parchment rounded-lg shadow-lg border-4 border-burntOrange mx-8 mx-auto">
+      <p className="font-semibold font-montserrat text-2xl my-12 p-8 bg-parchment rounded-lg shadow-lg border-4 border-burntOrange mx-auto">
         We're still working on our registry. <br />
         Please check back in early August.
       </p>
