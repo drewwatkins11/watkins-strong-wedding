@@ -1,3 +1,5 @@
+"use client";
+
 import Countdown from "@/components/countdown";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,7 +8,7 @@ import WhereContent from "@/components/WhereContent";
 import WhoContent from "@/components/WhoContent";
 import RegistryContent from "@/components/RegistryContent";
 
-function SectionHeading({
+export function SectionHeading({
   color,
   heading,
 }: {
@@ -24,7 +26,7 @@ function SectionHeading({
   );
 }
 
-const BodySection = ({
+export const BodySection = ({
   className,
   children,
   ...props

@@ -1,3 +1,5 @@
+"use client";
+
 import { useBreakpoint } from "@/hooks/tailwind";
 import Image from "next/image";
 

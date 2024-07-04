@@ -1,5 +1,4 @@
 import "@/styles/globals.css";
-import type { AppProps } from "next/app";
 import localFont from "next/font/local";
 import { Quicksand, Montserrat } from "next/font/google";
 
@@ -28,12 +27,22 @@ const montserratFont = Montserrat({
   variable: "--font-montserrat",
 });
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function RootLayout({
+  // Layouts must accept a children prop.
+  // This will be populated with nested layouts or pages
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <main
-      className={`${bambiFont.variable} ${yellowRabbitFont.variable} ${halloOysterFont.variable} ${quicksandFont.variable} ${montserratFont.variable} text-xl text-black`}
-    >
-      <Component {...pageProps} />
-    </main>
+    <html lang="en">
+      <body>
+        <main
+          className={`${bambiFont.variable} ${yellowRabbitFont.variable} ${halloOysterFont.variable} ${quicksandFont.variable} ${montserratFont.variable} min-h-full text-xl text-black`}
+        >
+          {children}
+        </main>
+      </body>
+    </html>
   );
 }

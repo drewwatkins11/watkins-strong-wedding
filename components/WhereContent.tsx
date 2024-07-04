@@ -1,3 +1,5 @@
+"use client";
+
 import { useBreakpoint } from "@/hooks/tailwind";
 import { useState } from "react";
 import Image from "next/image";
