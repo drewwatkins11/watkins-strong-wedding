@@ -5,7 +5,7 @@ export const signInSchema = object({
     3,
     "Surname is required"
   ),
-  houseNumber: string({ required_error: "House number is required" }).min(
+  inviteCode: string({ required_error: "Invite code is required" }).min(
     3,
     "House number is required"
   ),

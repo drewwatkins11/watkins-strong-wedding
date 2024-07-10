@@ -1,0 +1,61 @@
+type GuestStatus =
+  | "Consideration"
+  | "Decided"
+  | "Invited"
+  | "Confirmed"
+  | "Declined"
+  | "Not Invited";
+
+type GuestTags =
+  | "close family"
+  | "wedding party"
+  | "the cuz's & then some"
+  | "extended family"
+  | "friend of the family"
+  | "friends"
+  | "professional friends"
+  | "co-workers"
+  | "extended friends"
+  | "wave 1"
+  | "rehearsal dinner"
+  | "breakfast";
+
+type Bride = "Ainsley";
+type Groom = "Drew";
+
+interface DinnerCounts {
+  beefDinnerCount?: Number;
+  salmonDinnerCount?: Number;
+  childDinnerCount?: Number;
+  veganDinnerCount?: Number;
+  totalDinnerCount?: Number;
+}
+
+interface GuestGroup {
+  offered: Number | null;
+  claimed?: Number;
+}
+
+interface Guest {
+  name: string;
+  guestStatus: GuestStatus;
+  phone?: string;
+  inviteId: string;
+  address?: string;
+  SMSUpdates?: boolean;
+  inviteCode: string;
+  createdAt: Date;
+  guestOf?: (Bride | Groom)[];
+  addressVerified: boolean;
+  email?: string;
+  guestNote?: string;
+  saveDateWave?: number;
+  attendingRehersalDinner: boolean;
+  attendingBreakfast: boolean;
+  tags?: GuestTags[];
+  totalInvites: number | null;
+  totalAttendees?: number | null;
+  guestCount: GuestGroup;
+  children: GuestGroup;
+  plusOnes: GuestGroup;
+}

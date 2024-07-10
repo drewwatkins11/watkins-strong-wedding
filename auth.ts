@@ -7,25 +7,23 @@ import { signInSchema } from "./lib/zod";
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Credentials({
-      // You can specify which fields should be submitted, by adding keys to the `credentials` object.
-      // e.g. domain, username, password, 2FA token, etc.
       credentials: {
         lastName: {},
         houseNumber: {},
+        inviteCode: {},
       },
       // @ts-expect-error
       authorize: async (credentials) => {
         try {
           let user: User | null = null;
 
-          const { lastName, houseNumber } = await signInSchema.parseAsync(
+          const { lastName, inviteCode } = await signInSchema.parseAsync(
             credentials
           );
 
-          // logic to salt and hash password
-
-          // logic to verify if user exists
-          // user = await getUserFromDb(email, pwHash)
+          // get all invites that match an inviteCode
+          // look for last name match in any of the inviteCode matches
+          // return user object by looking for matched name
 
           user = {
             name: "drew",
