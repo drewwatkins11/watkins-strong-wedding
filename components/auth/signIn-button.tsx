@@ -1,4 +1,4 @@
-import { auth, signIn } from "@/auth.ts";
+import { signIn } from "@/auth.ts";
 
 export async function SignIn() {
   return (
@@ -8,7 +8,7 @@ export async function SignIn() {
         await signIn();
       }}
     >
-      <button type="submit">Sign in</button>
+      <button type="submit">Lookup Invite</button>
     </form>
   );
 }
