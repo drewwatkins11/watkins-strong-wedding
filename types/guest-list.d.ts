@@ -37,6 +37,8 @@ interface GuestGroup {
 }
 
 interface Guest {
+  resourceId: string;
+  resourceURL: string;
   name: string;
   guestStatus: GuestStatus;
   phone?: string;

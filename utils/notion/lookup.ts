@@ -40,10 +40,13 @@ export const constructFilter = ({
 };
 
 const processNotionResponse = (notionRes: any) => {
+  const { id, url } = notionRes;
   const notionResponse = notionRes.properties;
 
   const guest: Guest = {} as Guest;
 
+  guest.resourceId = id;
+  guest.resourceURL = url;
   guest.name = notionResponse.Name.title[0].plain_text;
   guest.guestStatus = notionResponse.Status.select.name;
   guest.phone =
