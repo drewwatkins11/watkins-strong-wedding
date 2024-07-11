@@ -54,13 +54,13 @@ const processNotionResponse = (notionRes: any) => {
       ? undefined
       : notionResponse.Phone.phone_number;
   guest.inviteId = notionResponse.inviteId.formula.string;
-  guest.address =
-    notionResponse.Address.rich_text.length &&
-    notionResponse.Address.rich_text[0].plain_text;
+  guest.address = notionResponse.Address.rich_text.length
+    ? notionResponse.Address.rich_text[0].plain_text
+    : undefined;
   guest.SMSUpdates = notionResponse["SMS Updates"].checkbox;
-  guest.inviteCode =
-    notionResponse["Invite Code"].rich_text.length &&
-    notionResponse["Invite Code"].rich_text[0].plain_text;
+  guest.inviteCode = notionResponse["Invite Code"].rich_text.length
+    ? notionResponse["Invite Code"].rich_text[0].plain_text
+    : undefined;
   guest.createdAt = notionResponse["Created time"].created_time;
   // guest.guestOf: ,
   guest.addressVerified = notionResponse["Address Verified"].checkbox;
@@ -68,9 +68,9 @@ const processNotionResponse = (notionRes: any) => {
     notionResponse.Email.email === null
       ? undefined
       : notionResponse.Email.email;
-  guest.guestNote =
-    notionResponse["Guest Note"].rich_text.length &&
-    notionResponse["Guest Note"].rich_text[0].plain_text;
+  guest.guestNote = notionResponse["Guest Note"].rich_text.length
+    ? notionResponse["Guest Note"].rich_text[0].plain_text
+    : undefined;
   guest.saveDateWave = notionResponse["Save the Date: Wave"].number;
   guest.attendingRehersalDinner = notionResponse["Rehearsal Dinner"].checkbox;
   guest.attendingBreakfast = notionResponse["Breakfast"].checkbox;
@@ -83,6 +83,9 @@ const processNotionResponse = (notionRes: any) => {
   guest.plusOnes = {
     offered: notionResponse["+1's"].number,
     claimed: notionResponse["+1's"].number,
+    name: notionResponse["+1 Name"].rich_text.length
+      ? notionResponse["+1 Name"].rich_text[0].plain_text
+      : undefined,
   };
   guest.children = {
     offered: notionResponse["+1's (Kids)"].number,
@@ -90,11 +93,12 @@ const processNotionResponse = (notionRes: any) => {
   };
   guest.tags = (() => {
     const tags = [];
-    notionResponse.Tags.multi_select.length &&
-      notionResponse.Tags.multi_select.forEach((tag) => {
-        // @ts-ignore
-        tags.push(tag.name);
-      });
+    notionResponse.Tags.multi_select.length
+      ? notionResponse.Tags.multi_select.forEach((tag) => {
+          // @ts-ignore
+          tags.push(tag.name);
+        })
+      : null;
     return tags;
   })();
 

@@ -36,6 +36,10 @@ interface GuestGroup {
   claimed?: number;
 }
 
+interface PlusOne extends GuestGroup {
+  name?: string;
+}
+
 interface Guest {
   resourceId: string;
   resourceURL: string;
@@ -54,10 +58,10 @@ interface Guest {
   saveDateWave?: number;
   attendingRehersalDinner: boolean;
   attendingBreakfast: boolean;
-  tags?: GuestTags[];
+  tags: GuestTags[] | null;
   totalInvites: number | null;
   totalAttendees?: number | null;
   guestCount: GuestGroup;
   children: GuestGroup;
-  plusOnes: GuestGroup;
+  plusOnes: PlusOne;
 }
