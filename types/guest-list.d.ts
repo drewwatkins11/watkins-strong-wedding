@@ -24,16 +24,16 @@ type Bride = "Ainsley";
 type Groom = "Drew";
 
 interface DinnerCounts {
-  beefDinnerCount?: Number;
-  salmonDinnerCount?: Number;
-  childDinnerCount?: Number;
-  veganDinnerCount?: Number;
-  totalDinnerCount?: Number;
+  beefDinnerCount?: number;
+  salmonDinnerCount?: number;
+  childDinnerCount?: number;
+  veganDinnerCount?: number;
+  totalDinnerCount?: number;
 }
 
 interface GuestGroup {
-  offered: Number | null;
-  claimed?: Number;
+  offered: number | null;
+  claimed?: number;
 }
 
 interface Guest {
