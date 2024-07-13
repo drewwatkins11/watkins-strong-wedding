@@ -14,6 +14,25 @@ export const prepareForNotion = (inviteData: PartialDeep<Guest>) => {
   if (inviteData.children?.claimed) {
     properties["Accepted: Children"] = { number: inviteData.children.claimed };
   }
+  if (inviteData.plusOnes?.name) {
+    properties["+1 Name"] = {
+      type: "text",
+      text: {
+        content: inviteData.plusOnes?.name,
+        link: null,
+      },
+      annotations: {
+        bold: false,
+        italic: false,
+        strikethrough: false,
+        underline: false,
+        code: false,
+        color: "default",
+      },
+      plain_text: inviteData.plusOnes?.name,
+      href: null,
+    };
+  }
 
   // Update dinners
   if (inviteData.dinnerPicks?.beefDinnerCount) {
