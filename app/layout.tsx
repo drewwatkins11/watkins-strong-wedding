@@ -35,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="cupcake">
       <body>
         <main
           className={`${bambiFont.variable} ${yellowRabbitFont.variable} ${halloOysterFont.variable} ${quicksandFont.variable} ${montserratFont.variable} min-h-full text-xl text-black`}

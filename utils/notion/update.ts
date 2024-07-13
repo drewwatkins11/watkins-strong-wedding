@@ -37,6 +37,35 @@ export const prepareForNotion = (inviteData: PartialDeep<Guest>) => {
     };
   }
 
+  // Update Extras
+  if (inviteData.attendingBreakfast) {
+    properties["Breakfast"] = {
+      checkbox: inviteData.attendingBreakfast,
+    };
+  }
+  if (inviteData.attendingRehersalDinner) {
+    properties["Rehearsal Dinner"] = {
+      checkbox: inviteData.attendingRehersalDinner,
+    };
+  }
+
+  // Update Contact info
+  if (inviteData.email) {
+    properties["Email"] = {
+      email: inviteData.email,
+    };
+  }
+  if (inviteData.phone) {
+    properties["Phone"] = {
+      phone_number: inviteData.phone,
+    };
+  }
+  if (inviteData.SMSUpdates) {
+    properties["SMS Updates"] = {
+      checkbox: inviteData.SMSUpdates,
+    };
+  }
+
   return properties;
 };
 

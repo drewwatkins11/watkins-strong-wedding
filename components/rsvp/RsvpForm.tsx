@@ -4,17 +4,21 @@ import GuestCount from "@/components/rsvp/GuestCount";
 import { useMemo, useState } from "react";
 import { type Session } from "next-auth";
 import FoodChoice from "./FoodChoice";
+import ExtrasChoice from "./ExtrasChoice";
+import ContactInfo from "./ContactInfo";
 
 const steps = ["Guests", "Food", "Extras", "Contact Details", "Add a Note"];
-const extraTags: GuestTags[] = ["breakfast", "rehearsal dinner"];
+export const extraTags: GuestTags[] = ["breakfast", "rehearsal dinner"];
 
 export default function RsvpForm(props) {
   const { onComplete, session }: { onComplete: any; session: Session } = props;
 
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(3);
 
-  const invitedToExtras: boolean = extraTags.some((tag) =>
-    session.user.inviteDetails.tags?.includes(tag)
+  const invitedToExtras: boolean = useMemo(
+    () =>
+      extraTags.some((tag) => session.user.inviteDetails.tags?.includes(tag)),
+    [session.user.inviteDetails.tags]
   );
 
   const visibleSteps = useMemo(() => {
@@ -22,7 +26,7 @@ export default function RsvpForm(props) {
     return steps;
   }, [invitedToExtras]);
 
-  const maxSteps = useMemo(() => visibleSteps.length, [visibleSteps]);
+  const maxSteps = visibleSteps.length;
 
   const onAdvance = () =>
     step === maxSteps ? onComplete() : setStep(step + 1);
@@ -36,15 +40,29 @@ export default function RsvpForm(props) {
           </li>
         ))}
       </ul>
-      {step === 0 && (
+      {step === visibleSteps.indexOf("Guests") && (
         <GuestCount
           pageId={session.user.inviteDetails.resourceId}
           inviteDetails={session.user.inviteDetails}
           onComplete={onAdvance}
         />
       )}
-      {step === 1 && (
+      {step === visibleSteps.indexOf("Food") && (
         <FoodChoice
+          pageId={session.user.inviteDetails.resourceId}
+          inviteDetails={session.user.inviteDetails}
+          onComplete={onAdvance}
+        />
+      )}
+      {step === visibleSteps.indexOf("Extras") && (
+        <ExtrasChoice
+          pageId={session.user.inviteDetails.resourceId}
+          inviteDetails={session.user.inviteDetails}
+          onComplete={onAdvance}
+        />
+      )}
+      {step === visibleSteps.indexOf("Contact Details") && (
+        <ContactInfo
           pageId={session.user.inviteDetails.resourceId}
           inviteDetails={session.user.inviteDetails}
           onComplete={onAdvance}

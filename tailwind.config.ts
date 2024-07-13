@@ -9,6 +9,9 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  daisyui: {
+    themes: ["light", "dark", "autumn"],
+  },
   theme: {
     textShadow: {
       sm: "1px 1px 2px var(--tw-shadow-color)",

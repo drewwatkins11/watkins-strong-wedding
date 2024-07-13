@@ -10,24 +10,11 @@ export default function FoodChoice(props) {
     onComplete,
   }: { pageId: string; inviteDetails: Guest; onComplete: () => any } = props;
 
-  const [beef, setBeef] = useState<number>(
-    inviteDetails.dinnerPicks.beefDinnerCount ||
-      // @ts-ignore
-      inviteDetails.guestCount.claimed + inviteDetails.plusOnes.claimed ||
-      0
+  const [breakfast, setBreakfast] = useState<boolean>(
+    inviteDetails.attendingBreakfast || false
   );
-  const [salmon, setSalmon] = useState<number>(
-    inviteDetails.dinnerPicks.salmonDinnerCount || 0
-  );
-  const [child, setChild] = useState<number>(
-    inviteDetails.dinnerPicks.childDinnerCount || 0
-  );
-  const [vegan, setVegan] = useState<number>(
-    inviteDetails.dinnerPicks.veganDinnerCount || 0
-  );
-
-  const [totalDinners, setTotalDinners] = useState<number>(
-    beef + (salmon || 0) + (child || 0) + (vegan || 0)
+  const [rehearsal, setRehearsalDinner] = useState<boolean>(
+    inviteDetails.attendingRehersalDinner || false
   );
 
   const updateDinnerCount = (
