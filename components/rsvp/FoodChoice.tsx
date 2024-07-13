@@ -22,16 +22,16 @@ export default function FoodChoice(props) {
   const [child, setChild] = useState<number>(
     inviteDetails.dinnerPicks.childDinnerCount || 0
   );
-  const [vegan, setVegan] = useState<number>(
-    inviteDetails.dinnerPicks.veganDinnerCount || 0
+  const [vegeterian, setVegeterian] = useState<number>(
+    inviteDetails.dinnerPicks.vegeterianDinnerCount || 0
   );
 
   const [totalDinners, setTotalDinners] = useState<number>(
-    beef + (salmon || 0) + (child || 0) + (vegan || 0)
+    beef + (salmon || 0) + (child || 0) + (vegeterian || 0)
   );
 
   const updateDinnerCount = (
-    dinnerType: "beef" | "salmon" | "child" | "vegan",
+    dinnerType: "beef" | "salmon" | "child" | "vegeterian",
     action: "add" | "subtract"
   ) => {
     const count = action === "add" ? 1 : -1;
@@ -51,11 +51,11 @@ export default function FoodChoice(props) {
           if (beef > 0) setBeef(beef - count);
         setChild(child + count);
         break;
-      case "vegan":
+      case "vegeterian":
         // @ts-ignore
         if (totalDinners + count > inviteDetails.guestCount.claimed)
           if (beef > 0) setBeef(beef - count);
-        setVegan(vegan + count);
+        setVegeterian(vegeterian + count);
         break;
       default:
         break;
@@ -63,8 +63,8 @@ export default function FoodChoice(props) {
   };
 
   useEffect(() => {
-    setTotalDinners(beef + (salmon || 0) + (child || 0) + (vegan || 0));
-  }, [beef, salmon, child, vegan]);
+    setTotalDinners(beef + (salmon || 0) + (child || 0) + (vegeterian || 0));
+  }, [beef, salmon, child, vegeterian]);
 
   const [isPending, startTransition] = useTransition();
 
@@ -75,7 +75,7 @@ export default function FoodChoice(props) {
           beefDinnerCount: beef,
           salmonDinnerCount: salmon,
           childDinnerCount: child,
-          veganDinnerCount: vegan,
+          vegeterianDinnerCount: vegeterian,
         },
       }).then(onComplete);
     });
@@ -95,8 +95,8 @@ export default function FoodChoice(props) {
       </p>
       <p>
         For those who have an aversion to beef, we will also be offering smoked
-        salmon, along with alternative options for children and vegans (chef's
-        choice for both).{" "}
+        salmon, along with alternative options for vegeterians and children
+        (chef's choice for both).{" "}
       </p>
       <div className="flex flex-col gap-8 !text-black">
         <p>How many people in your party will be eating beef?</p>
@@ -141,23 +141,23 @@ export default function FoodChoice(props) {
         </div>
         <div className="flex flex-col gap-8 !text-black">
           <p>
-            How many people in your party would prefer a vegan meal (chef's
+            How many people in your party would prefer a vegeterian meal (chef's
             choice)?
           </p>
           <div className="flex flex-row gap-8 items-center mx-auto">
             <button
               className="btn btn-circle"
-              onClick={() => updateDinnerCount("vegan", "subtract")}
-              disabled={vegan <= 0}
+              onClick={() => updateDinnerCount("vegeterian", "subtract")}
+              disabled={vegeterian <= 0}
             >
               -
             </button>
-            <div>{vegan?.toString()}</div>
+            <div>{vegeterian?.toString()}</div>
             <button
               className="btn btn-circle"
-              onClick={() => updateDinnerCount("vegan", "add")}
+              onClick={() => updateDinnerCount("vegeterian", "add")}
               // @ts-ignore
-              disabled={vegan >= inviteDetails.guestCount.claimed}
+              disabled={vegeterian >= inviteDetails.guestCount.claimed}
             >
               +
             </button>

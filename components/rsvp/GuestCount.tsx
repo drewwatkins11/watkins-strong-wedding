@@ -72,7 +72,7 @@ export default function GuestCount(props) {
                   <button
                     className="btn btn-circle"
                     onClick={() => updateGuestCount(guestCount - 1)}
-                    disabled={guestCount <= 0}
+                    disabled={guestCount <= 1}
                   >
                     -
                   </button>

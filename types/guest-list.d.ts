@@ -27,7 +27,7 @@ interface DinnerCounts {
   beefDinnerCount?: number;
   salmonDinnerCount?: number;
   childDinnerCount?: number;
-  veganDinnerCount?: number;
+  vegeterianDinnerCount?: number;
   totalDinnerCount?: number;
 }
 

@@ -54,9 +54,9 @@ export const prepareForNotion = (inviteData: PartialDeep<Guest>) => {
       number: inviteData.dinnerPicks.childDinnerCount,
     };
   }
-  if (inviteData.dinnerPicks?.veganDinnerCount) {
-    properties["Dinner:Vegan"] = {
-      number: inviteData.dinnerPicks.veganDinnerCount,
+  if (inviteData.dinnerPicks?.vegeterianDinnerCount) {
+    properties["Dinner:Vegeterian"] = {
+      number: inviteData.dinnerPicks.vegeterianDinnerCount,
     };
   }
 

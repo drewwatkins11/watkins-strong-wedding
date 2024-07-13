@@ -95,7 +95,7 @@ const processNotionResponse = (notionRes: any) => {
     beefDinnerCount: notionResponse["Dinner:Beef"].number,
     salmonDinnerCount: notionResponse["Dinner:Salmon"].number,
     childDinnerCount: notionResponse["Dinner:Child"].number,
-    veganDinnerCount: notionResponse["Dinner:Vegan"].number,
+    vegeterianDinnerCount: notionResponse["Dinner:Vegeterian"].number,
   };
   guest.tags = (() => {
     const tags = [];
