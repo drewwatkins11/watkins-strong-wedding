@@ -51,6 +51,7 @@ const config: Config = {
   },
   plugins: [
     require("@tailwindcss/typography"),
+    require("daisyui"),
     require("tailwind-fontawesome")({
       version: 6,
     }),
