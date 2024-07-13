@@ -11,11 +11,13 @@ import NotePage from "./Note";
 const steps = ["Guests", "Food", "Extras", "Contact Details", "Add a Note"];
 export const extraTags: GuestTags[] = ["breakfast", "rehearsal dinner"];
 
+const Complete = () => <div>Thank you for RSVPing!</div>;
+
 export default function RsvpForm(props) {
-  const { session }: { onComplete: any; session: Session } = props;
-  const onComplete = () => {};
+  const { session }: { session: Session } = props;
 
   const [step, setStep] = useState(0);
+  const [complete, setComplete] = useState(false);
 
   const invitedToExtras: boolean = useMemo(
     () =>
@@ -32,51 +34,60 @@ export default function RsvpForm(props) {
   const maxSteps = visibleSteps.length - 1;
 
   const onAdvance = () =>
-    step === maxSteps ? onComplete() : setStep(step + 1);
+    step === maxSteps ? setComplete(true) : setStep(step + 1);
 
   return (
     <div>
-      <ul className="steps">
-        {visibleSteps.map((stepName, index) => (
-          <li key={index} className={`step ${index <= step && "step-primary"}`}>
-            {stepName}
-          </li>
-        ))}
-      </ul>
-      {step === visibleSteps.indexOf("Guests") && (
-        <GuestCount
-          pageId={session.user.inviteDetails.resourceId}
-          inviteDetails={session.user.inviteDetails}
-          onComplete={onAdvance}
-        />
-      )}
-      {step === visibleSteps.indexOf("Food") && (
-        <FoodChoice
-          pageId={session.user.inviteDetails.resourceId}
-          inviteDetails={session.user.inviteDetails}
-          onComplete={onAdvance}
-        />
-      )}
-      {step === visibleSteps.indexOf("Extras") && (
-        <ExtrasChoice
-          pageId={session.user.inviteDetails.resourceId}
-          inviteDetails={session.user.inviteDetails}
-          onComplete={onAdvance}
-        />
-      )}
-      {step === visibleSteps.indexOf("Contact Details") && (
-        <ContactInfo
-          pageId={session.user.inviteDetails.resourceId}
-          inviteDetails={session.user.inviteDetails}
-          onComplete={onAdvance}
-        />
-      )}
-      {step === visibleSteps.indexOf("Add a Note") && (
-        <NotePage
-          pageId={session.user.inviteDetails.resourceId}
-          inviteDetails={session.user.inviteDetails}
-          onComplete={onAdvance}
-        />
+      {!!complete ? (
+        <Complete />
+      ) : (
+        <>
+          <ul className="steps">
+            {visibleSteps.map((stepName, index) => (
+              <li
+                key={index}
+                className={`step ${index <= step && "step-primary"}`}
+              >
+                {stepName}
+              </li>
+            ))}
+          </ul>
+          {step === visibleSteps.indexOf("Guests") && (
+            <GuestCount
+              pageId={session.user.inviteDetails.resourceId}
+              inviteDetails={session.user.inviteDetails}
+              onComplete={onAdvance}
+            />
+          )}
+          {step === visibleSteps.indexOf("Food") && (
+            <FoodChoice
+              pageId={session.user.inviteDetails.resourceId}
+              inviteDetails={session.user.inviteDetails}
+              onComplete={onAdvance}
+            />
+          )}
+          {step === visibleSteps.indexOf("Extras") && (
+            <ExtrasChoice
+              pageId={session.user.inviteDetails.resourceId}
+              inviteDetails={session.user.inviteDetails}
+              onComplete={onAdvance}
+            />
+          )}
+          {step === visibleSteps.indexOf("Contact Details") && (
+            <ContactInfo
+              pageId={session.user.inviteDetails.resourceId}
+              inviteDetails={session.user.inviteDetails}
+              onComplete={onAdvance}
+            />
+          )}
+          {step === visibleSteps.indexOf("Add a Note") && (
+            <NotePage
+              pageId={session.user.inviteDetails.resourceId}
+              inviteDetails={session.user.inviteDetails}
+              onComplete={onAdvance}
+            />
+          )}
+        </>
       )}
     </div>
   );

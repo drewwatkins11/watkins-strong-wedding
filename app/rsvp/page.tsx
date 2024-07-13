@@ -23,7 +23,6 @@ export default async function rsvpPage() {
             </p>
           </div>
           <RsvpForm session={session} />
-          <SignOut />
         </div>
       )}
     </BodySection>
