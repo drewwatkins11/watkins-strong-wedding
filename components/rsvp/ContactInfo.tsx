@@ -22,7 +22,7 @@ export default function ContactInfo(props) {
 
   const [isPending, startTransition] = useTransition();
 
-  const submitExtras = () => {
+  const submitContactInfo = () => {
     startTransition(async () => {
       await updateInvite(pageId, {
         email,
@@ -97,7 +97,7 @@ export default function ContactInfo(props) {
           </div>
         </>
       )}
-      <button className="btn" disabled={isPending} onClick={submitExtras}>
+      <button className="btn" disabled={isPending} onClick={submitContactInfo}>
         {isPending ? "saving" : "continue"}
       </button>
     </div>
