@@ -2,6 +2,7 @@
 
 import { updateInvite } from "@/app/actions";
 import { useState, useTransition } from "react";
+import { NoteField } from "./Note";
 
 export default function GuestCount(props) {
   const {
@@ -21,6 +22,8 @@ export default function GuestCount(props) {
     inviteDetails.plusOnes.name || ""
   );
 
+  const [note, setNote] = useState<string | undefined>(inviteDetails.guestNote);
+
   const [isPending, startTransition] = useTransition();
 
   const updateAttending = (answer: boolean) => {
@@ -33,6 +36,7 @@ export default function GuestCount(props) {
       await updateInvite(pageId, {
         guestCount: { claimed: guestCount },
         plusOnes: { claimed: plusOnes, name: plusOneName },
+        guestNote: note,
       }).then(onComplete);
     });
   };
@@ -166,6 +170,15 @@ export default function GuestCount(props) {
               </div>
             </>
           )} */}
+        </div>
+      )}
+      {attending === false && (
+        <div className="flex flex-col justify-center items-center gap-4">
+          <p>
+            We wish you could make it, but we'll miss you! If you'd like to
+            leave a note for Ainsley & Drew, you can do that here.
+          </p>
+          <NoteField note={note} setNote={setNote} />
         </div>
       )}
       {attending !== null && (

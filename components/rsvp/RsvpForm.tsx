@@ -6,14 +6,16 @@ import { type Session } from "next-auth";
 import FoodChoice from "./FoodChoice";
 import ExtrasChoice from "./ExtrasChoice";
 import ContactInfo from "./ContactInfo";
+import NotePage from "./Note";
 
 const steps = ["Guests", "Food", "Extras", "Contact Details", "Add a Note"];
 export const extraTags: GuestTags[] = ["breakfast", "rehearsal dinner"];
 
 export default function RsvpForm(props) {
-  const { onComplete, session }: { onComplete: any; session: Session } = props;
+  const { session }: { onComplete: any; session: Session } = props;
+  const onComplete = () => {};
 
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(0);
 
   const invitedToExtras: boolean = useMemo(
     () =>
@@ -22,11 +24,12 @@ export default function RsvpForm(props) {
   );
 
   const visibleSteps = useMemo(() => {
-    if (!invitedToExtras) return steps.filter((steps, index) => index !== 2);
+    if (!invitedToExtras)
+      return steps.filter((steps, index) => index !== steps.indexOf("Extras"));
     return steps;
   }, [invitedToExtras]);
 
-  const maxSteps = visibleSteps.length;
+  const maxSteps = visibleSteps.length - 1;
 
   const onAdvance = () =>
     step === maxSteps ? onComplete() : setStep(step + 1);
@@ -63,6 +66,13 @@ export default function RsvpForm(props) {
       )}
       {step === visibleSteps.indexOf("Contact Details") && (
         <ContactInfo
+          pageId={session.user.inviteDetails.resourceId}
+          inviteDetails={session.user.inviteDetails}
+          onComplete={onAdvance}
+        />
+      )}
+      {step === visibleSteps.indexOf("Add a Note") && (
+        <NotePage
           pageId={session.user.inviteDetails.resourceId}
           inviteDetails={session.user.inviteDetails}
           onComplete={onAdvance}

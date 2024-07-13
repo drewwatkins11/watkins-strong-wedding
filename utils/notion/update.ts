@@ -16,21 +16,25 @@ export const prepareForNotion = (inviteData: PartialDeep<Guest>) => {
   }
   if (inviteData.plusOnes?.name) {
     properties["+1 Name"] = {
-      type: "text",
-      text: {
-        content: inviteData.plusOnes?.name,
-        link: null,
-      },
-      annotations: {
-        bold: false,
-        italic: false,
-        strikethrough: false,
-        underline: false,
-        code: false,
-        color: "default",
-      },
-      plain_text: inviteData.plusOnes?.name,
-      href: null,
+      rich_text: [
+        {
+          type: "text",
+          text: {
+            content: inviteData.plusOnes?.name,
+            link: null,
+          },
+          annotations: {
+            bold: false,
+            italic: false,
+            strikethrough: false,
+            underline: false,
+            code: false,
+            color: "default",
+          },
+          plain_text: inviteData.plusOnes?.name,
+          href: null,
+        },
+      ],
     };
   }
 
@@ -82,6 +86,31 @@ export const prepareForNotion = (inviteData: PartialDeep<Guest>) => {
   if (inviteData.SMSUpdates) {
     properties["SMS Updates"] = {
       checkbox: inviteData.SMSUpdates,
+    };
+  }
+
+  // Update Guest Note
+  if (inviteData.guestNote) {
+    properties["Guest Note"] = {
+      rich_text: [
+        {
+          type: "text",
+          text: {
+            content: inviteData.guestNote,
+            link: null,
+          },
+          annotations: {
+            bold: false,
+            italic: false,
+            strikethrough: false,
+            underline: false,
+            code: false,
+            color: "default",
+          },
+          plain_text: inviteData.guestNote,
+          href: null,
+        },
+      ],
     };
   }
 
