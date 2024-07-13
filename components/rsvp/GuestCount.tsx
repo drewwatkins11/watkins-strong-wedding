@@ -33,7 +33,7 @@ export default function GuestCount(props) {
       await updateInvite(pageId, {
         guestCount: { claimed: guestCount },
         plusOnes: { claimed: plusOnes, name: plusOneName },
-      }).then(onComplete());
+      }).then(onComplete);
     });
   };
 

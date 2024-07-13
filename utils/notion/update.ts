@@ -4,6 +4,7 @@ import { notion } from "@/utils/notion/notion-client";
 export const prepareForNotion = (inviteData: PartialDeep<Guest>) => {
   let properties = {};
 
+  // Update attendees
   if (inviteData.guestCount?.claimed) {
     properties["Accepted"] = { number: inviteData.guestCount.claimed };
   }
@@ -12,6 +13,28 @@ export const prepareForNotion = (inviteData: PartialDeep<Guest>) => {
   }
   if (inviteData.children?.claimed) {
     properties["Accepted: Children"] = { number: inviteData.children.claimed };
+  }
+
+  // Update dinners
+  if (inviteData.dinnerPicks?.beefDinnerCount) {
+    properties["Dinner:Beef"] = {
+      number: inviteData.dinnerPicks.beefDinnerCount,
+    };
+  }
+  if (inviteData.dinnerPicks?.salmonDinnerCount) {
+    properties["Dinner:Salmon"] = {
+      number: inviteData.dinnerPicks.salmonDinnerCount,
+    };
+  }
+  if (inviteData.dinnerPicks?.childDinnerCount) {
+    properties["Dinner:Child"] = {
+      number: inviteData.dinnerPicks.childDinnerCount,
+    };
+  }
+  if (inviteData.dinnerPicks?.veganDinnerCount) {
+    properties["Dinner:Vegan"] = {
+      number: inviteData.dinnerPicks.veganDinnerCount,
+    };
   }
 
   return properties;

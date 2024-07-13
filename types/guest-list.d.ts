@@ -64,4 +64,5 @@ interface Guest {
   guestCount: GuestGroup;
   children: GuestGroup;
   plusOnes: PlusOne;
+  dinnerPicks: DinnerCounts;
 }

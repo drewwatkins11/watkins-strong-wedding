@@ -2,6 +2,7 @@
 
 import GuestCount from "@/components/rsvp/GuestCount";
 import { useState } from "react";
+import FoodChoice from "./FoodChoice";
 
 export default function RsvpForm(props) {
   const maxSteps = 2;
@@ -15,6 +16,13 @@ export default function RsvpForm(props) {
       Step: {step}
       {step === 0 && (
         <GuestCount
+          pageId={session.user.inviteDetails.resourceId}
+          inviteDetails={session.user.inviteDetails}
+          onComplete={onAdvance}
+        />
+      )}
+      {step === 1 && (
+        <FoodChoice
           pageId={session.user.inviteDetails.resourceId}
           inviteDetails={session.user.inviteDetails}
           onComplete={onAdvance}

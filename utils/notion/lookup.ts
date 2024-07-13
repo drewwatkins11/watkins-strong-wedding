@@ -91,6 +91,12 @@ const processNotionResponse = (notionRes: any) => {
     offered: notionResponse["+1's (Kids)"].number,
     claimed: notionResponse["Accepted: Children"].number,
   };
+  guest.dinnerPicks = {
+    beefDinnerCount: notionResponse["Dinner:Beef"].number,
+    salmonDinnerCount: notionResponse["Dinner:Salmon"].number,
+    childDinnerCount: notionResponse["Dinner:Child"].number,
+    veganDinnerCount: notionResponse["Dinner:Vegan"].number,
+  };
   guest.tags = (() => {
     const tags = [];
     notionResponse.Tags.multi_select.length
