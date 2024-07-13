@@ -1,25 +1,10 @@
 import "@/styles/globals.css";
 import localFont from "next/font/local";
-import { Quicksand, Montserrat } from "next/font/google";
-
-const bambiFont = localFont({
-  src: "../styles/fonts/X_BAMBI.ttf",
-  variable: "--font-bambi",
-});
-
-const yellowRabbitFont = localFont({
-  src: "../styles/fonts/yellowRabbit.otf",
-  variable: "--font-rabbit",
-});
+import { Montserrat } from "next/font/google";
 
 const halloOysterFont = localFont({
   src: "../styles/fonts/halloOyster.otf",
   variable: "--font-oyster",
-});
-
-const quicksandFont = Quicksand({
-  subsets: ["latin"],
-  variable: "--font-quicksand",
 });
 
 const montserratFont = Montserrat({
@@ -35,10 +20,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-theme="cupcake">
+    <html lang="en" data-theme="autumn">
       <body>
         <main
-          className={`${bambiFont.variable} ${yellowRabbitFont.variable} ${halloOysterFont.variable} ${quicksandFont.variable} ${montserratFont.variable} min-h-full text-xl text-black`}
+          className={` ${halloOysterFont.variable} ${montserratFont.variable} min-h-full text-xl text-black font-sans font-montserrat`}
         >
           {children}
         </main>

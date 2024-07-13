@@ -10,6 +10,7 @@ import NotePage from "./Note";
 
 const steps = ["Guests", "Food", "Extras", "Contact Details", "Add a Note"];
 export const extraTags: GuestTags[] = ["breakfast", "rehearsal dinner"];
+export const mustAttendBoth: GuestTags[] = ["close family", "wedding party"];
 
 const Complete = () => <div>Thank you for RSVPing!</div>;
 
@@ -33,30 +34,38 @@ export default function RsvpForm(props) {
 
   const maxSteps = visibleSteps.length - 1;
 
-  const onAdvance = () =>
-    step === maxSteps ? setComplete(true) : setStep(step + 1);
+  const onAdvance = (notAttending?: boolean) => {
+    if (notAttending) {
+      setComplete(true);
+    } else {
+      step === maxSteps ? setComplete(true) : setStep(step + 1);
+    }
+  };
 
   return (
-    <div>
+    <div className="w-full lg:w-4/5">
       {!!complete ? (
         <Complete />
       ) : (
         <>
-          <ul className="steps">
+          <ul className="steps mb-12">
             {visibleSteps.map((stepName, index) => (
               <li
                 key={index}
-                className={`step ${index <= step && "step-primary"}`}
+                className={`step text-sm after:text-sm ${
+                  index <= step && "step-primary"
+                } ${index === step && "after:shadow-lg"}`}
               >
                 {stepName}
               </li>
             ))}
           </ul>
+          <hr className="border mb-6 mt-0 border-black w-full mx-auto" />
           {step === visibleSteps.indexOf("Guests") && (
             <GuestCount
               pageId={session.user.inviteDetails.resourceId}
               inviteDetails={session.user.inviteDetails}
-              onComplete={onAdvance}
+              onComplete={(notAttending: boolean) => onAdvance(notAttending)}
             />
           )}
           {step === visibleSteps.indexOf("Food") && (
@@ -64,6 +73,7 @@ export default function RsvpForm(props) {
               pageId={session.user.inviteDetails.resourceId}
               inviteDetails={session.user.inviteDetails}
               onComplete={onAdvance}
+              onBack={() => setStep(step - 1)}
             />
           )}
           {step === visibleSteps.indexOf("Extras") && (
@@ -71,6 +81,7 @@ export default function RsvpForm(props) {
               pageId={session.user.inviteDetails.resourceId}
               inviteDetails={session.user.inviteDetails}
               onComplete={onAdvance}
+              onBack={() => setStep(step - 1)}
             />
           )}
           {step === visibleSteps.indexOf("Contact Details") && (
@@ -78,6 +89,7 @@ export default function RsvpForm(props) {
               pageId={session.user.inviteDetails.resourceId}
               inviteDetails={session.user.inviteDetails}
               onComplete={onAdvance}
+              onBack={() => setStep(step - 1)}
             />
           )}
           {step === visibleSteps.indexOf("Add a Note") && (
@@ -85,6 +97,7 @@ export default function RsvpForm(props) {
               pageId={session.user.inviteDetails.resourceId}
               inviteDetails={session.user.inviteDetails}
               onComplete={onAdvance}
+              onBack={() => setStep(step - 1)}
             />
           )}
         </>

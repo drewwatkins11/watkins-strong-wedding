@@ -5,41 +5,7 @@ import { faCalendar } from "@fortawesome/free-regular-svg-icons";
 import WhereContent from "@/components/WhereContent";
 import WhoContent from "@/components/WhoContent";
 import RegistryContent from "@/components/RegistryContent";
-
-export function SectionHeading({
-  color,
-  heading,
-}: {
-  color?: string;
-  heading: string;
-}) {
-  return (
-    <h2
-      className={`font-oyster text-8xl lg:text-9xl text-center lg:self-start lg:text-left mb-6 -mt-8 capitalize text-shadow-sm shadow-zinc-600 ${
-        color || "text-wheat"
-      }`}
-    >
-      {heading}
-    </h2>
-  );
-}
-
-export const BodySection = ({
-  className,
-  children,
-  ...props
-}: React.ComponentPropsWithoutRef<"div">) => {
-  return (
-    <div
-      className={`flex flex-col items-center text-center w-full lg:text-center bg-parchment lg:px-8 py-12 lg:p-24  bg-gradient-to-b from-transparent from-50% to-transparent-15 ${
-        className && className
-      }`}
-      {...props}
-    >
-      {children}
-    </div>
-  );
-};
+import { BodySection, SectionHeading } from "@/components/common";
 
 export default async function Home() {
   return (
@@ -73,7 +39,7 @@ export default async function Home() {
             </p>
           </div>
           <div className="w-11/12 lg:w-4/5 bg-parchment text-zinc-600 text-center pb-6 shadow-xl mt-4 lg:mt-0">
-            <h3 className="font-oyster text-wine text-5xl lg:text-7xl m-5 lg:my-5">
+            <h3 className="text-wine text-5xl lg:text-7xl m-5 lg:my-5">
               The countdown
             </h3>
             <Countdown />
@@ -88,7 +54,7 @@ export default async function Home() {
           style={{ maxWidth: "1600px" }}
         >
           <p className="italic">Our wedding is to be held on:</p>
-          <h3 className="font-oyster text-4xl lg:text-7xl mt-2 mb-4 text-deepGreen">
+          <h3 className="mt-2 mb-4 text-deepGreen">
             Saturday, October 12th, 2024
           </h3>
           <a
@@ -104,7 +70,7 @@ export default async function Home() {
             </button>
           </a>
 
-          <div className="prose prose-p:text-xl prose-p:text-black mt-4">
+          <div className="prose prose-stone prose-p:text-xl prose-p:text-black mt-4">
             <hr className="mb-6 mt-0 border-black w-4/12 mx-auto" />
             <p>
               <strong>The ceremony will start promptly at 3:30pm</strong>.
@@ -145,10 +111,10 @@ export default async function Home() {
       <BodySection id="wear" className="!bg-wine">
         <SectionHeading heading="wear" color="text-wheat" />
         <div
-          className="w-5/6 lg:w-4/5 prose prose-headings:text-wheat prose-p:text-snow prose-p:font-light prose-xl prose-headings:mb-3 prose-p:font-montserrat"
+          className="w-5/6 lg:w-4/5 prose prose-stone prose-headings:text-wheat prose-p:text-snow prose-p:font-light prose-xl prose-headings:mb-3 prose-p:font-montserrat"
           style={{ maxWidth: "1600px;" }}
         >
-          <h3 className="text-5xl font-oyster">Cocktail attire</h3>
+          <h3 className="text-5xl">Cocktail attire</h3>
           <p>
             Join us for an elegant celebration under the open sky! While our
             venue may be rustic, we&apos;re encouraging our guests to look
@@ -187,7 +153,7 @@ export default async function Home() {
               className="rounded-2xl shadow-xl w-2/5 lg:w-3/12"
             />
           </div>
-          <h3 className="text-5xl font-oyster">yet... Dress for the Weather</h3>
+          <h3 className="text-5xl">yet... Dress for the Weather</h3>
           <p>
             Even though we hope to have a beautiful outdoor wedding, it{" "}
             <i>is</i> autumn in Pennsylvania. Some rain in always possible and a

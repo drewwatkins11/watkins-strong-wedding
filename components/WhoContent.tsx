@@ -30,7 +30,7 @@ export default function WhoContent() {
           key={bio.name}
           className="flex flex-col gap-x-4 w-full lg:w-5/12 align-middle justify-center"
         >
-          <h2 className="text-6xl lg:text-7xl font-oyster">{bio.name}</h2>
+          <h3>{bio.name}</h3>
           <Image
             alt={`photo of ${bio.name}`}
             src={`/${bio.img}`}

@@ -26,6 +26,18 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+@layer base {
+  h2 {
+    @apply font-oyster text-6xl lg:text-8xl text-center capitalize text-shadow-sm shadow-stone-600;
+  }
+  h3 {
+    @apply font-oyster text-4xl lg:text-7xl mb-4 mt-0;
+  }
+  h4 {
+    @apply font-bold mb-2 text-xl;
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

@@ -2,6 +2,7 @@
 
 import { updateInvite } from "@/app/actions";
 import { useState, useTransition } from "react";
+import { ControlButtons } from "./controls";
 
 export const NoteField = (props) => {
   const { note, setNote } = props;
@@ -9,8 +10,9 @@ export const NoteField = (props) => {
   return (
     <textarea
       placeholder="Your Note"
-      className="textarea textarea-bordered textarea-lg w-full max-w-md"
+      className="textarea textarea-bordered w-full max-w-xl"
       value={note}
+      rows={7}
       onChange={(e) => setNote(e.target.value)}
     ></textarea>
   );
@@ -21,7 +23,13 @@ export default function NotePage(props) {
     pageId,
     inviteDetails,
     onComplete,
-  }: { pageId: string; inviteDetails: Guest; onComplete: () => any } = props;
+    onBack,
+  }: {
+    pageId: string;
+    inviteDetails: Guest;
+    onComplete: () => any;
+    onBack: () => void;
+  } = props;
 
   const [note, setNote] = useState<string | undefined>(inviteDetails.guestNote);
 
@@ -36,16 +44,21 @@ export default function NotePage(props) {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center">
-      <h4>Share a note with the couple</h4>
-      <p>
-        We invite you to leave a short note for us prior to the wedding. We'd
-        love your words of encouragement, wisdom, or well-wishes!
-      </p>
+    <div className="flex flex-col justify-center items-center gap-6">
+      <div>
+        <h4>Share a note with the couple</h4>
+        <p>
+          We invite you to leave a short note for us prior to the wedding. We'd
+          love your words of encouragement, wisdom, or well-wishes!
+        </p>
+      </div>
       <NoteField note={note} setNote={setNote} />
-      <button className="btn" disabled={isPending} onClick={submitNote}>
-        {isPending ? "saving" : "finish"}
-      </button>
+      <ControlButtons
+        onBack={onBack}
+        onContinue={submitNote}
+        labels={{ continueLabel: "finish" }}
+        isPending={isPending}
+      />
     </div>
   );
 }

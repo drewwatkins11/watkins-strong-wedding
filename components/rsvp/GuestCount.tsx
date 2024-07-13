@@ -1,17 +1,28 @@
 "use client";
 
 import { updateInvite } from "@/app/actions";
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { NoteField } from "./Note";
+import { BoolInput, ControlButtons, CountInput } from "./controls";
+import { mustAttendBoth } from "./RsvpForm";
 
 export default function GuestCount(props) {
   const {
     pageId,
     inviteDetails,
     onComplete,
-  }: { pageId: string; inviteDetails: Guest; onComplete: () => any } = props;
+  }: {
+    pageId: string;
+    inviteDetails: Guest;
+    onComplete: (notAttending: boolean) => void;
+  } = props;
 
-  const [attending, setAttending] = useState<boolean | null>(null);
+  const [attending, setAttending] = useState<boolean | null>(
+    !!inviteDetails.guestCount.claimed || null
+  );
+  const [receptionOnly, setReceptionOnly] = useState<boolean | undefined>(
+    inviteDetails.receptionOnly || false
+  );
   const [guestCount, updateGuestCount] = useState(
     inviteDetails.guestCount.claimed || inviteDetails.guestCount.offered || 0
   );
@@ -22,9 +33,17 @@ export default function GuestCount(props) {
     inviteDetails.plusOnes.name || ""
   );
 
+  const [childCount, setChildCount] = useState<number>(
+    inviteDetails.children.offered || 0
+  );
+
   const [note, setNote] = useState<string | undefined>(inviteDetails.guestNote);
 
   const [isPending, startTransition] = useTransition();
+
+  useEffect(() => {
+    console.log(plusOnes);
+  }, [plusOnes]);
 
   const updateAttending = (answer: boolean) => {
     inviteDetails.guestCount.offered === 1 && updateGuestCount(1);
@@ -36,76 +55,90 @@ export default function GuestCount(props) {
       await updateInvite(pageId, {
         guestCount: { claimed: guestCount },
         plusOnes: { claimed: plusOnes, name: plusOneName },
+        children: { claimed: childCount },
+        receptionOnly,
         guestNote: note,
-      }).then(onComplete);
+      }).then((attending) => onComplete(attending === false));
     });
   };
 
   return (
-    <div className="flex flex-col justify-center items-center">
-      <p>Do you plan on attending?</p>
-      <div className="flex flex-row gap-4">
-        <button
-          className={`btn ${!!attending ? "btn-active" : ""}`}
-          onClick={() => updateAttending(true)}
-        >
-          Yes
-        </button>
-        <button
-          className={`btn ${!attending ? "btn-active" : ""}`}
-          onClick={() => updateAttending(false)}
-        >
-          No
-        </button>
-      </div>
+    <div className="flex flex-col justify-center items-center gap-8">
+      <BoolInput
+        questionText="Do you plan on attending?"
+        value={attending}
+        updateFn={updateAttending}
+      />
       {!!attending && (
-        <div className="flex flex-col gap-8 !text-black">
+        <div className="flex flex-col !text-black mx-auto lg:max-w-3/5 gap-8">
+          {!mustAttendBoth.some((tag) => inviteDetails.tags?.includes(tag)) && (
+            <BoolInput
+              questionText="Will you be attending both the ceremony and the reception?"
+              value={!receptionOnly}
+              updateFn={(val) => setReceptionOnly(val === false)}
+              noLabel="No, just the reception"
+            >
+              <p>
+                Even if you can't make it to the ceremony, we still invite you
+                to join us in celebrating at the reception.
+              </p>
+            </BoolInput>
+          )}
           {inviteDetails.guestCount.offered &&
             inviteDetails.guestCount.offered > 1 && (
-              <>
-                <p>
-                  You have {inviteDetails.guestCount.offered?.toString()}{" "}
+              <CountInput
+                questionText={`How many ${
+                  !!inviteDetails.children.offered ? "adults" : "people"
+                } will be attending?`}
+                value={guestCount}
+                incBehavior={{
+                  callback: () => updateGuestCount(guestCount + 1),
+                  disabled: guestCount >= inviteDetails.guestCount.offered,
+                }}
+                dIncBehavior={{
+                  callback: () => updateGuestCount(guestCount - 1),
+                  disabled: guestCount <= 1,
+                }}
+              >
+                <p className="">
+                  You have{" "}
+                  <strong>
+                    {inviteDetails.guestCount.offered?.toString()}
+                  </strong>{" "}
                   invites available for your party.
                 </p>
-                <p>How many people should we plan on attending?</p>
-                <div className="flex flex-row gap-8 items-center mx-auto">
-                  <button
-                    className="btn btn-circle"
-                    onClick={() => updateGuestCount(guestCount - 1)}
-                    disabled={guestCount <= 1}
-                  >
-                    -
-                  </button>
-                  <div>{guestCount.toString()}</div>
-                  <button
-                    className="btn btn-circle"
-                    onClick={() => updateGuestCount(guestCount + 1)}
-                    disabled={guestCount >= inviteDetails.guestCount.offered}
-                  >
-                    +
-                  </button>
-                </div>
-              </>
+              </CountInput>
             )}
           {!!inviteDetails.plusOnes.offered &&
             inviteDetails.plusOnes.offered === 1 && (
-              <>
-                <p>Do you plan on bringing a "plus one"?</p>
-                <div className="flex flex-row gap-4">
-                  <button
-                    className={`btn ${!!attending && "btn-active"}`}
-                    onClick={() => setPlusOnes(1)}
-                  >
-                    Yes
-                  </button>
-                  <button
-                    className={`btn ${!attending && "btn-active"}`}
-                    onClick={() => setPlusOnes(0)}
-                  >
-                    No
-                  </button>
-                </div>
-              </>
+              <CountInput
+                questionText="How many children will be attending?"
+                value={childCount}
+                incBehavior={{
+                  callback: () => setChildCount(childCount + 1),
+                  // @ts-ignore
+                  disabled: childCount >= inviteDetails.children.offered,
+                }}
+                dIncBehavior={{
+                  callback: () => setChildCount(childCount - 1),
+                  disabled: childCount <= 0,
+                }}
+              >
+                <p>
+                  We have{" "}
+                  <strong>{inviteDetails.children.offered?.toString()}</strong>{" "}
+                  children listed. Contact Ainsley or Drew if you need more
+                  children added to your invite.
+                </p>
+              </CountInput>
+            )}
+          {!!inviteDetails.plusOnes.offered &&
+            inviteDetails.plusOnes.offered === 1 && (
+              <BoolInput
+                questionText="Do you plan on bringing a plus one?"
+                value={plusOnes === 1 ? true : false}
+                updateFn={(bool) => setPlusOnes(!!bool ? 1 : 0)}
+              />
             )}
           {!!inviteDetails.plusOnes.offered &&
             inviteDetails.plusOnes.offered > 1 && (
@@ -114,35 +147,22 @@ export default function GuestCount(props) {
                   You have {inviteDetails.plusOnes.offered?.toString()} +1's
                   available.
                 </p>
-                <p>How many do you plan on bringing?</p>
-                <div className="flex flex-row gap-8 items-center mx-auto">
-                  <button
-                    className="btn btn-circle"
-                    onClick={() => setPlusOnes(plusOnes - 1)}
-                    disabled={plusOnes <= 0}
-                  >
-                    -
-                  </button>
-                  <div>{plusOnes.toString()}</div>
-                  <button
-                    className="btn btn-circle"
-                    onClick={() => setPlusOnes(plusOnes + 1)}
-                    disabled={plusOnes >= inviteDetails.plusOnes.offered}
-                  >
-                    +
-                  </button>
-                </div>
-                <button
-                  className="btn"
-                  disabled={isPending}
-                  onClick={submitGuests}
-                >
-                  {isPending ? "saving" : "continue"}
-                </button>
+                <CountInput
+                  questionText="How many do you plan on bringing?"
+                  value={plusOnes}
+                  incBehavior={{
+                    callback: () => setPlusOnes(plusOnes - 1),
+                    disabled: plusOnes <= 0,
+                  }}
+                  dIncBehavior={{
+                    callback: () => setPlusOnes(plusOnes + 1),
+                    disabled: plusOnes >= inviteDetails.plusOnes.offered,
+                  }}
+                />
               </>
             )}
           {!!plusOnes && (
-            <>
+            <div className="flex flex-col items-center gap-2">
               <p>What is their name?</p>
               <input
                 type="text"
@@ -151,7 +171,7 @@ export default function GuestCount(props) {
                 value={plusOneName}
                 onChange={(e) => setPlusOneName(e.target.value)}
               />
-            </>
+            </div>
           )}
           {/* {!!plusOnes && (
             <>
@@ -182,9 +202,11 @@ export default function GuestCount(props) {
         </div>
       )}
       {attending !== null && (
-        <button className="btn" disabled={isPending} onClick={submitGuests}>
-          {isPending ? "saving" : !!attending ? "continue" : "submit"}
-        </button>
+        <ControlButtons
+          isPending={isPending}
+          onContinue={submitGuests}
+          labels={{ continueLabel: !!attending ? "continue" : "submit" }}
+        />
       )}
     </div>
   );

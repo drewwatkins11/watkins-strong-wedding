@@ -28,6 +28,7 @@ interface DinnerCounts {
   salmonDinnerCount?: number;
   childDinnerCount?: number;
   vegeterianDinnerCount?: number;
+  infantDinnerCount?: number;
   totalDinnerCount?: number;
 }
 
@@ -65,4 +66,5 @@ interface Guest {
   children: GuestGroup;
   plusOnes: PlusOne;
   dinnerPicks: DinnerCounts;
+  receptionOnly?: boolean;
 }

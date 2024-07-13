@@ -8,6 +8,9 @@ export const prepareForNotion = (inviteData: PartialDeep<Guest>) => {
   if (inviteData.guestCount?.claimed) {
     properties["Accepted"] = { number: inviteData.guestCount.claimed };
   }
+  if (inviteData.receptionOnly) {
+    properties["Reception Only"] = { checkbox: inviteData.receptionOnly };
+  }
   if (inviteData.plusOnes?.claimed) {
     properties["Accepted: +1"] = { number: inviteData.plusOnes.claimed };
   }
@@ -57,6 +60,11 @@ export const prepareForNotion = (inviteData: PartialDeep<Guest>) => {
   if (inviteData.dinnerPicks?.vegeterianDinnerCount) {
     properties["Dinner:Vegeterian"] = {
       number: inviteData.dinnerPicks.vegeterianDinnerCount,
+    };
+  }
+  if (inviteData.dinnerPicks?.infantDinnerCount) {
+    properties["Dinner:Infant"] = {
+      number: inviteData.dinnerPicks.infantDinnerCount,
     };
   }
 

@@ -91,14 +91,12 @@ export default function WhereContent() {
 
   return (
     <div className="flex flex-col lg:flex-row justify-around w-full gap-8 lg:gap-0 flex-wrap">
-      <div className="prose px-4 lg:px-0 lg:w-2/5 prose-headings:text-parchment prose-p:text-parchment prose-p:text-lg ">
+      <div className="prose prose-stone px-4 lg:px-0 lg:w-2/5 prose-headings:text-parchment prose-p:text-parchment prose-p:text-lg ">
         <p className="italic font-thin mb-0">
           The ceremony and reception
           <br /> will be held at the:
         </p>
-        <h3 className="font-oyster text-4xl lg:text-7xl mb-4 mt-0">
-          Wilderness Lodge
-        </h3>
+        <h3 className="text-4xl lg:text-7xl mb-4 mt-0">Wilderness Lodge</h3>
         <p className="italic font-thin mb-0">located at:</p>
         <p className="mt-0">
           13448 Weeks Valley Rd
@@ -188,9 +186,7 @@ export default function WhereContent() {
         />
       </div>
       <div className="w-11/12 lg:w-full mx-auto bg-parchment p-8 rounded-2xl shadow-lg text-black mt-12">
-        <h3 className="font-oyster text-4xl lg:text-7xl mb-4 mt-0">
-          Accomodations
-        </h3>
+        <h3 className="text-4xl lg:text-7xl mb-4 mt-0">Accomodations</h3>
         <p className="w-3/5 mx-auto">
           Accomodations are available at several area hotels. Here are the best
           options:
@@ -198,7 +194,7 @@ export default function WhereContent() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-8 text-base w-11/12 mx-auto">
           {accomodations.map((accomodation, index) => (
             <div className="flex flex-col basis-5/12 mb-4" key={index}>
-              <h3 className="font-bold mb-2 text-xl">{accomodation.title}</h3>
+              <h4 className="font-bold mb-2 text-xl">{accomodation.title}</h4>
               <p>{accomodation.description}</p>
               {accomodation.bookingLink && (
                 <a

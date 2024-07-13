@@ -47,7 +47,9 @@ const processNotionResponse = (notionRes: any) => {
 
   guest.resourceId = id;
   guest.resourceURL = url;
-  guest.name = notionResponse.Name.title[0].plain_text;
+  guest.name = notionResponse["Invite Name Override"].rich_text.length
+    ? notionResponse["Invite Name Override"].rich_text[0].plain_text
+    : notionResponse.Name.title[0].plain_text;
   guest.guestStatus = notionResponse.Status.select.name;
   guest.phone =
     notionResponse.Phone.phone_number === null
@@ -74,10 +76,11 @@ const processNotionResponse = (notionRes: any) => {
   guest.saveDateWave = notionResponse["Save the Date: Wave"].number;
   guest.attendingRehersalDinner = notionResponse["Rehearsal Dinner"].checkbox;
   guest.attendingBreakfast = notionResponse["Breakfast"].checkbox;
-  guest.totalInvites = notionResponse["Total People"].formula.number;
+  guest.receptionOnly = notionResponse["Reception Only"].checkbox;
+  guest.totalInvites = notionResponse["Total Invited"].formula.number;
   guest.totalAttendees = notionResponse["Total Attendees"].formula.number;
   guest.guestCount = {
-    offered: notionResponse["Total People"].formula.number,
+    offered: notionResponse["Guest Count"].formula.number,
     claimed: notionResponse["Accepted"].number,
   };
   guest.plusOnes = {
@@ -96,6 +99,7 @@ const processNotionResponse = (notionRes: any) => {
     salmonDinnerCount: notionResponse["Dinner:Salmon"].number,
     childDinnerCount: notionResponse["Dinner:Child"].number,
     vegeterianDinnerCount: notionResponse["Dinner:Vegeterian"].number,
+    infantDinnerCount: notionResponse["Dinner:Infant"].number,
   };
   guest.tags = (() => {
     const tags = [];

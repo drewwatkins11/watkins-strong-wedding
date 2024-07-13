@@ -1,7 +1,24 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 import type { Config } from "tailwindcss";
 const plugin = require("tailwindcss/plugin");
+
+const customColors = {
+  white: "#fff",
+  snow: "#EBEBEB",
+  latte: "#F5F0E0",
+  parchment: "#F1E9D2",
+  wheat: "#f1dca7",
+  peach: "#D9AE94",
+  sage: "#9B9B7A",
+  darkGreen: "#3a5a40",
+  deepGreen: "#1b4332",
+  burntOrange: "#a44200",
+  ember: "#8f250c",
+  wine: "#562D36",
+  "transparent-15": "rgba(0,0,0,.15)",
+};
 
 const config: Config = {
   content: [
@@ -10,10 +27,21 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   daisyui: {
-    themes: ["light", "dark", "autumn"],
+    themes: [
+      "light",
+      "dark",
+      {
+        autumn: {
+          ...require("daisyui/src/theming/themes")["autumn"],
+          primary: customColors.ember,
+          secondary: customColors.sage,
+        },
+      },
+    ],
   },
   theme: {
     textShadow: {
+      none: "none",
       sm: "1px 1px 2px var(--tw-shadow-color)",
       DEFAULT: "2px 2px 4px var(--tw-shadow-color)",
       lg: "4px 4px 8px var(--tw-shadow-color)",
@@ -25,25 +53,13 @@ const config: Config = {
         bigFix: "150px",
       },
       fontFamily: {
-        bambi: ["var(--font-bambi)"],
-        rabbit: ["var(--font-rabbit)"],
+        sans: ["Montserrat", ...defaultTheme.fontFamily.sans],
         oyster: ["var(--font-oyster)"],
         montserrat: ["var(--font-montserrat)"],
       },
       colors: {
-        white: "#fff",
-        snow: "#EBEBEB",
-        latte: "#F5F0E0",
-        parchment: "#F1E9D2",
-        wheat: "#f1dca7",
-        peach: "#D9AE94",
-        sage: "#9B9B7A",
-        darkGreen: "#3a5a40",
-        deepGreen: "#1b4332",
-        burntOrange: "#a44200",
-        ember: "#8f250c",
-        wine: "#562D36",
-        "transparent-15": "rgba(0,0,0,.15)",
+        ...customColors,
+        primary: customColors.wine,
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

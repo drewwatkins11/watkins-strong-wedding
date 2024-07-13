@@ -88,7 +88,7 @@ export default function Countdown() {
             </p>
           )}
           <h2
-            className={`font-extrabold text-xl uppercase ${
+            className={`font-montserrat shadow-none text-shadow-none font-extrabold text-xl uppercase ${
               index > currentTaskIndex && "font-semibold"
             }`}
           >
