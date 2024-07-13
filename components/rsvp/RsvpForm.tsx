@@ -1,19 +1,41 @@
 "use client";
 
 import GuestCount from "@/components/rsvp/GuestCount";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { type Session } from "next-auth";
 import FoodChoice from "./FoodChoice";
 
+const steps = ["Guests", "Food", "Extras", "Contact Details", "Add a Note"];
+const extraTags: GuestTags[] = ["breakfast", "rehearsal dinner"];
+
 export default function RsvpForm(props) {
-  const maxSteps = 2;
+  const { onComplete, session }: { onComplete: any; session: Session } = props;
+
   const [step, setStep] = useState(0);
 
-  const onAdvance = () => (step < maxSteps ? setStep(step + 1) : onComplete());
+  const invitedToExtras: boolean = extraTags.some((tag) =>
+    session.user.inviteDetails.tags?.includes(tag)
+  );
 
-  const { onComplete, session } = props;
+  const visibleSteps = useMemo(() => {
+    if (!invitedToExtras) return steps.filter((steps, index) => index !== 2);
+    return steps;
+  }, [invitedToExtras]);
+
+  const maxSteps = useMemo(() => visibleSteps.length, [visibleSteps]);
+
+  const onAdvance = () =>
+    step === maxSteps ? onComplete() : setStep(step + 1);
+
   return (
     <div>
-      Step: {step}
+      <ul className="steps">
+        {visibleSteps.map((stepName, index) => (
+          <li key={index} className={`step ${index <= step && "step-primary"}`}>
+            {stepName}
+          </li>
+        ))}
+      </ul>
       {step === 0 && (
         <GuestCount
           pageId={session.user.inviteDetails.resourceId}
