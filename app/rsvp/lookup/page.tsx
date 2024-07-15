@@ -1,9 +1,7 @@
-import { cookies } from "next/headers";
 import { auth, signIn } from "@/auth.ts";
 import { redirect } from "next/navigation";
 
 // @ts-ignore
-const csrfToken = cookies().get("authjs.csrf-token")?.value ?? "";
 
 export default async function SignInPage() {
   const session = await auth();
@@ -80,7 +78,6 @@ export default async function SignInPage() {
           />
         </label>
       </div>
-      <input type="hidden" name="csrfToken" value={csrfToken} />
       <input type="hidden" name="redirectTo" value="/rsvp" />
       <button className="btn btn-primary">Sign In</button>
     </form>
