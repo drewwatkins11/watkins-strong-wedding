@@ -11,7 +11,8 @@ import NotePage from "./Note";
 import Complete from "./Complete";
 
 import { createStore, useStateMachine } from "little-state-machine";
-import { updateInvite } from "@/app/state-provider";
+import { clearState, updateInvite } from "@/app/state-provider";
+import { signOut } from "next-auth/react";
 
 const steps = ["Guests", "Food", "Extras", "Contact Details", "Add a Note"];
 export const extraTags: GuestTags[] = ["breakfast", "rehearsal dinner"];
@@ -23,7 +24,7 @@ export default function RsvpForm(props) {
   const [step, setStep] = useState(0);
   const [complete, setComplete] = useState(false);
 
-  const { actions, state } = useStateMachine({ updateInvite });
+  const { actions, state } = useStateMachine({ updateInvite, clearState });
 
   const invitedToExtras: boolean = useMemo(
     () => extraTags.some((tag) => state?.inviteDetails?.tags?.includes(tag)),
@@ -114,6 +115,17 @@ export default function RsvpForm(props) {
                 onBack={() => setStep(step - 1)}
               />
             )}
+            <div className="mt-16">
+              <button
+                className="btn btn-sm"
+                onClick={() => {
+                  actions.clearState();
+                  signOut();
+                }}
+              >
+                Sign Out
+              </button>
+            </div>
           </>
         )}
       </div>

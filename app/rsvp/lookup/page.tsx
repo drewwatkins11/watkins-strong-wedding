@@ -1,10 +1,17 @@
 import { cookies } from "next/headers";
-import { signIn } from "@/auth.ts";
+import { auth, signIn } from "@/auth.ts";
+import { redirect } from "next/navigation";
 
 // @ts-ignore
 const csrfToken = cookies().get("authjs.csrf-token")?.value ?? "";
 
-export default function SignInPage() {
+export default async function SignInPage() {
+  const session = await auth();
+
+  if (session) {
+    redirect("/rsvp");
+  }
+
   return (
     <form
       className="flex flex-col gap-4 mx-auto p-4 w-11/12 lg:w-2/3 lg:max-w-lg"
