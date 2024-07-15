@@ -29,7 +29,7 @@ export default async function Home() {
               </h1>
             </div>
             <Image
-              src="/drew_ainsley_yard_cropped.png"
+              src="/drew_ainsley_yard_cropped.jpg"
               alt="Drew and Ainsley standing together"
               width="1200"
               height="1200"
