@@ -1,7 +1,7 @@
 "use client";
 
 import { updateInvite } from "@/app/actions";
-import { useEffect, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { NoteField } from "./Note";
 import { BoolInput, ControlButtons, CountInput } from "./controls";
 import { mustAttendBoth } from "./RsvpForm";
@@ -107,29 +107,28 @@ export default function GuestCount(props) {
                 </p>
               </CountInput>
             )}
-          {!!inviteDetails.plusOnes.offered &&
-            inviteDetails.plusOnes.offered === 1 && (
-              <CountInput
-                questionText="How many children will be attending?"
-                value={childCount}
-                incBehavior={{
-                  callback: () => setChildCount(childCount + 1),
-                  // @ts-ignore
-                  disabled: childCount >= inviteDetails.children.offered,
-                }}
-                dIncBehavior={{
-                  callback: () => setChildCount(childCount - 1),
-                  disabled: childCount <= 0,
-                }}
-              >
-                <p>
-                  We have{" "}
-                  <strong>{inviteDetails.children.offered?.toString()}</strong>{" "}
-                  children listed. Contact Ainsley or Drew if you need more
-                  children added to your invite.
-                </p>
-              </CountInput>
-            )}
+          {!!inviteDetails.children.offered && (
+            <CountInput
+              questionText="How many children will be attending?"
+              value={childCount}
+              incBehavior={{
+                callback: () => setChildCount(childCount + 1),
+                // @ts-ignore
+                disabled: childCount >= inviteDetails.children.offered,
+              }}
+              dIncBehavior={{
+                callback: () => setChildCount(childCount - 1),
+                disabled: childCount <= 0,
+              }}
+            >
+              <p>
+                We have{" "}
+                <strong>{inviteDetails.children.offered?.toString()}</strong>{" "}
+                children listed. Contact Ainsley or Drew if you need more
+                children added to your invite.
+              </p>
+            </CountInput>
+          )}
           {!!inviteDetails.plusOnes.offered &&
             inviteDetails.plusOnes.offered === 1 && (
               <BoolInput
