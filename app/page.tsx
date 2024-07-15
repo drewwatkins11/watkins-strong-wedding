@@ -36,7 +36,7 @@ export default async function Home() {
               className="shadow-xl lg:hidden"
             />
             <p className="text-2xl lg:text-4xl w-4/5 pt-2 text-center font-montserrat font-extralight text-snow text-shadow-lg shadow-zinc-900">
-              Join Drew & Ainsley as they tie the knot on October 12th
+              Join Ainsley & Drew as they tie the knot on October 12th
             </p>
           </div>
           <div className="w-11/12 lg:w-4/5 bg-parchment text-zinc-600 text-center pb-6 shadow-xl mt-4 lg:mt-0">
