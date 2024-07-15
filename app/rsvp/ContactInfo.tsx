@@ -2,7 +2,7 @@
 
 import { updateInvite } from "@/app/actions";
 import { useState, useTransition } from "react";
-import { BoolInput, ControlButtons, FormButton } from "./controls";
+import { BoolInput, ControlButtons } from "./controls";
 
 export default function ContactInfo(props) {
   const {
@@ -13,7 +13,7 @@ export default function ContactInfo(props) {
   }: {
     pageId: string;
     inviteDetails: Guest;
-    onComplete: () => any;
+    onComplete: (res) => any;
     onBack: () => void;
   } = props;
 
@@ -23,8 +23,8 @@ export default function ContactInfo(props) {
   const [phone, setPhone] = useState<string | undefined>(
     inviteDetails.phone || undefined
   );
-  const [permission, setPermission] = useState<boolean>(
-    inviteDetails.SMSUpdates || false
+  const [permission, setPermission] = useState<boolean | undefined>(
+    inviteDetails.SMSUpdates === true ? true : undefined
   );
 
   const [isPending, startTransition] = useTransition();
@@ -35,7 +35,7 @@ export default function ContactInfo(props) {
         email,
         phone,
         SMSUpdates: permission,
-      }).then(onComplete);
+      }).then((res) => onComplete(res));
     });
   };
 

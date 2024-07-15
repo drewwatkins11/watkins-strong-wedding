@@ -14,7 +14,7 @@ export default function GuestCount(props) {
   }: {
     pageId: string;
     inviteDetails: Guest;
-    onComplete: (notAttending: boolean) => void;
+    onComplete: (notionResponse, notAttending?: boolean) => void;
   } = props;
 
   const [attending, setAttending] = useState<boolean | null>(
@@ -41,10 +41,6 @@ export default function GuestCount(props) {
 
   const [isPending, startTransition] = useTransition();
 
-  useEffect(() => {
-    console.log(plusOnes);
-  }, [plusOnes]);
-
   const updateAttending = (answer: boolean) => {
     inviteDetails.guestCount.offered === 1 && updateGuestCount(1);
     setAttending(answer);
@@ -58,7 +54,9 @@ export default function GuestCount(props) {
         children: { claimed: childCount },
         receptionOnly,
         guestNote: note,
-      }).then((attending) => onComplete(attending === false));
+      }).then((res) => {
+        onComplete(res, attending === false);
+      });
     });
   };
 

@@ -27,7 +27,7 @@ export default function NotePage(props) {
   }: {
     pageId: string;
     inviteDetails: Guest;
-    onComplete: () => any;
+    onComplete: (res) => any;
     onBack: () => void;
   } = props;
 
@@ -39,7 +39,7 @@ export default function NotePage(props) {
     startTransition(async () => {
       await updateInvite(pageId, {
         guestNote: note,
-      }).then(onComplete);
+      }).then((res) => onComplete(res));
     });
   };
 

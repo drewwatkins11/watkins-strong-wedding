@@ -13,7 +13,7 @@ export default function FoodChoice(props) {
   }: {
     pageId: string;
     inviteDetails: Guest;
-    onComplete: () => void;
+    onComplete: (notionResponse: Guest) => void;
     onBack: () => void;
   } = props;
 
@@ -97,7 +97,7 @@ export default function FoodChoice(props) {
           childDinnerCount: child,
           vegeterianDinnerCount: vegeterian,
         },
-      }).then(onComplete);
+      }).then((res) => onComplete(res));
     });
   };
 
@@ -209,10 +209,7 @@ export default function FoodChoice(props) {
             </CountInput>
           )}
         <ControlButtons
-          onBack={() => {
-            console.log("going back");
-            onBack();
-          }}
+          onBack={onBack}
           isPending={isPending}
           onContinue={submitGuests}
           continueDisabled={

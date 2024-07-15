@@ -3,7 +3,7 @@
 import { updateInvite } from "@/app/actions";
 import { useState, useTransition } from "react";
 import { extraTags } from "./RsvpForm";
-import { BoolInput, ControlButtons, FormButton } from "./controls";
+import { BoolInput, ControlButtons } from "./controls";
 
 export default function ExtrasChoice(props) {
   const {
@@ -14,15 +14,15 @@ export default function ExtrasChoice(props) {
   }: {
     pageId: string;
     inviteDetails: Guest;
-    onComplete: () => any;
+    onComplete: (res) => any;
     onBack: () => void;
   } = props;
 
-  const [breakfast, setBreakfast] = useState<boolean>(
-    inviteDetails.attendingBreakfast || false
+  const [breakfast, setBreakfast] = useState<boolean | undefined>(
+    inviteDetails.attendingBreakfast === true ? true : undefined
   );
-  const [rehearsal, setRehearsalDinner] = useState<boolean>(
-    inviteDetails.attendingRehersalDinner || false
+  const [rehearsal, setRehearsalDinner] = useState<boolean | undefined>(
+    inviteDetails.attendingRehersalDinner === true ? true : undefined
   );
 
   const offerBoth: boolean = extraTags.some((tag) =>
@@ -40,7 +40,7 @@ export default function ExtrasChoice(props) {
       await updateInvite(pageId, {
         attendingBreakfast: breakfast,
         attendingRehersalDinner: rehearsal,
-      }).then(onComplete);
+      }).then((res) => onComplete(res));
     });
   };
 

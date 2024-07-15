@@ -1,20 +1,19 @@
-import { SignIn } from "@/components/auth/signIn-button";
 import { auth } from "@/auth";
-import { BodySection, SectionHeading } from "@/components/common";
-import RsvpForm from "@/components/rsvp/RsvpForm";
-import { SignOut } from "@/components/auth/signout-button";
+import RsvpForm from "@/app/rsvp/RsvpForm";
+import Link from "next/link";
+import InviteIdListener from "./InviteIdListener";
 
 export default async function rsvpPage() {
   const session = await auth();
 
   return (
-    <BodySection
-      id="where"
-      className="!bg-parchment text-black !h-full font-montserrat"
-    >
-      <SectionHeading heading="rsvp" color="black" />
+    <div className="w-full">
       {!session ? (
-        <SignIn />
+        <div>
+          <Link href="/rsvp/lookup">
+            <button className="btn btn-primary">Lookup Invite</button>
+          </Link>
+        </div>
       ) : (
         <div className="w-full lg:w-4/5 mx-auto flex flex-col gap-12 bg-snow p-12 shadow-xl rounded-md items-center">
           <div className="max-w-full">
@@ -24,11 +23,10 @@ export default async function rsvpPage() {
               their marriage on October 12th, 2024.
             </p>
           </div>
-          <RsvpForm session={session} />
+          <InviteIdListener session={session} />
+          <RsvpForm />
         </div>
       )}
-
-      <SignOut />
-    </BodySection>
+    </div>
   );
 }

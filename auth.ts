@@ -4,6 +4,7 @@ import Credentials from "next-auth/providers/credentials";
 import { ZodError } from "zod";
 import { signInSchema } from "./lib/zod";
 import { getGuests } from "./utils/notion/lookup";
+import type { Provider } from "next-auth/providers";
 
 declare module "next-auth" {
   /**
@@ -11,8 +12,8 @@ declare module "next-auth" {
    */
   interface Session {
     user: {
-      /** The user's postal address. */
-      inviteDetails: Guest;
+      /** The ID used to locate the page in Notion. */
+      inviteId: string;
       /**
        * By default, TypeScript merges new interface properties and overwrites existing ones.
        * In this case, the default session user properties will be overwritten,
@@ -23,74 +24,84 @@ declare module "next-auth" {
   }
   // @ts-ignore
   interface User extends DefaultUser {
-    inviteDetails: Guest;
+    inviteId: string;
   }
 }
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
-  providers: [
-    Credentials({
-      credentials: {
-        surname: {},
-        inviteId: {},
-        guestName: {},
-      },
-      authorize: async (credentials) => {
-        try {
-          // @ts-ignore
-          let user: User | null = null;
+const providers: Provider[] = [
+  Credentials({
+    credentials: {
+      surname: {},
+      inviteId: {},
+      guestName: {},
+    },
+    authorize: async (credentials) => {
+      try {
+        // @ts-ignore
+        let user: User | null = null;
 
-          const { surname, inviteId, guestName } =
-            await signInSchema.parseAsync(credentials);
+        const { surname, inviteId, guestName } = await signInSchema.parseAsync(
+          credentials
+        );
 
-          // get all invites that match an inviteCode
-          // look for last name match in any of the inviteCode matches
-          // return user object by looking for matched name
+        // get all invites that match an inviteCode
+        // look for last name match in any of the inviteCode matches
+        // return user object by looking for matched name
 
-          const invites = await getGuests({
-            inviteId,
-            surname,
-            guestName,
-          });
+        const invites = await getGuests({
+          inviteId,
+          surname,
+          guestName,
+        });
 
-          console.log("users", invites);
-
-          if (!invites || !invites.length) {
-            throw new Error("Invite not found.");
-          }
-
-          if (invites.length > 1) {
-            throw new Error("Multiple invites found.");
-          }
-
-          // return json object with the user data
-          const invite = invites[0];
-          user = {
-            name: invite.name,
-            inviteDetails: invite,
-          };
-
-          return user;
-        } catch (error) {
-          if (error instanceof ZodError) {
-            // Return `null` to indicate that the credentials are invalid
-            return null;
-          }
+        if (!invites || !invites.length) {
+          throw new Error("Invite not found.");
         }
-      },
-    }),
-  ],
+
+        if (invites.length > 1) {
+          throw new Error("Multiple invites found.");
+        }
+
+        // return json object with the user data
+        const invite = invites[0];
+        user = {
+          name: invite.name,
+          inviteId: invite.resourceId,
+        };
+
+        return user;
+      } catch (error) {
+        throw new Error(JSON.stringify({ errors: error, status: false }));
+      }
+    },
+  }),
+];
+
+export const providerMap = providers.map((provider) => {
+  if (typeof provider === "function") {
+    const providerData = provider();
+    return { id: providerData.id, name: providerData.name };
+  } else {
+    return { id: provider.id, name: provider.name };
+  }
+});
+
+export const { handlers, signIn, signOut, auth } = NextAuth({
+  providers,
+  pages: {
+    signIn: "/rsvp/lookup",
+  },
   callbacks: {
     jwt({ token, user }) {
       if (user) {
         // User is available during sign-in
-        token.inviteDetails = user.inviteDetails;
+        token.inviteId = user.inviteId;
       }
       return token;
     },
     session({ session, token }) {
       // @ts-ignore
-      session.user.inviteDetails = token.inviteDetails;
+      session.user.inviteId = token.inviteId;
       return session;
     },
   },

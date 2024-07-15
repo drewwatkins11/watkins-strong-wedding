@@ -1,5 +1,7 @@
+"use server";
 import type { PartialDeep } from "type-fest";
 import { notion } from "@/utils/notion/notion-client";
+import { processNotionResponse } from "./process";
 
 export const prepareForNotion = (inviteData: PartialDeep<Guest>) => {
   let properties = {};
@@ -24,7 +26,7 @@ export const prepareForNotion = (inviteData: PartialDeep<Guest>) => {
           type: "text",
           text: {
             content: inviteData.plusOnes?.name,
-            link: null,
+            link: undefined,
           },
           annotations: {
             bold: false,
@@ -35,7 +37,7 @@ export const prepareForNotion = (inviteData: PartialDeep<Guest>) => {
             color: "default",
           },
           plain_text: inviteData.plusOnes?.name,
-          href: null,
+          href: undefined,
         },
       ],
     };
@@ -105,7 +107,7 @@ export const prepareForNotion = (inviteData: PartialDeep<Guest>) => {
           type: "text",
           text: {
             content: inviteData.guestNote,
-            link: null,
+            link: undefined,
           },
           annotations: {
             bold: false,
@@ -116,7 +118,7 @@ export const prepareForNotion = (inviteData: PartialDeep<Guest>) => {
             color: "default",
           },
           plain_text: inviteData.guestNote,
-          href: null,
+          href: undefined,
         },
       ],
     };
@@ -132,12 +134,18 @@ export const updateNotionPage = async ({
   pageId: string;
   properties: { [x: string]: any };
 }) => {
-  const response = await notion.pages.update({
-    page_id: pageId,
-    properties,
-  });
-
-  console.log(response);
+  const response = await notion.pages
+    .update({
+      page_id: pageId,
+      properties,
+    })
+    .then((res) => {
+      // @ts-expect-error
+      // Notion doesn't include any keys except id and object (type) in their typing.
+      const notionResJSON: string = JSON.stringify(res.properties);
+      // return notionResJSON;
+      return res;
+    });
 
   return response;
 };

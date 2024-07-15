@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import localFont from "next/font/local";
 import { Montserrat } from "next/font/google";
+import StateProvider from "./state-provider";
 
 const halloOysterFont = localFont({
   src: "../styles/fonts/halloOyster.otf",
@@ -20,14 +21,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-theme="autumn">
-      <body>
-        <main
-          className={` ${halloOysterFont.variable} ${montserratFont.variable} min-h-full text-xl text-black font-sans font-montserrat`}
-        >
-          {children}
-        </main>
-      </body>
-    </html>
+    <StateProvider>
+      <html lang="en" data-theme="autumn">
+        <body>
+          <main
+            className={` ${halloOysterFont.variable} ${montserratFont.variable} min-h-full text-xl text-black font-sans`}
+          >
+            {children}
+          </main>
+        </body>
+      </html>
+    </StateProvider>
   );
 }
