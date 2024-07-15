@@ -24,7 +24,7 @@ export const BodySection = ({
   return (
     <div
       className={`flex flex-col items-center text-center w-full lg:text-center bg-parchment lg:px-8 py-12 lg:p-24  bg-gradient-to-b from-transparent from-50% to-transparent-15 ${
-        className && className
+        className ? className : undefined
       }`}
       {...props}
     >

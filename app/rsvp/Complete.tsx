@@ -2,6 +2,7 @@
 import { useStateMachine } from "little-state-machine";
 import { signOut } from "next-auth/react";
 import { clearState } from "../state-provider";
+import Link from "next/link";
 
 const Complete = () => {
   const { actions } = useStateMachine({ clearState });
@@ -14,6 +15,9 @@ const Complete = () => {
           See you in October. We can't wait to share our day with you!
         </p>
       </div>
+      <Link href="/">
+        <button className="btn btn-secondary">Return to wedding site</button>
+      </Link>
 
       <div>
         <button

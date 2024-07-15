@@ -6,6 +6,7 @@ import WhereContent from "@/components/WhereContent";
 import WhoContent from "@/components/WhoContent";
 import RegistryContent from "@/components/RegistryContent";
 import { BodySection, SectionHeading } from "@/components/common";
+import Link from "next/link";
 
 export default async function Home() {
   return (
@@ -46,6 +47,25 @@ export default async function Home() {
           </div>
         </div>
       </div>
+
+      <BodySection
+        id="rsvp"
+        className="!bg-parchment text-black !h-full font-montserrat"
+      >
+        <SectionHeading heading="rsvp" color="black" />
+        <div>
+          <h4 className="text-2xl">
+            To RSVP, start by looking up your invite.
+          </h4>
+          <p>Only one member of your party needs to RSVP.</p>
+          <p className="font-bold">Please RSVP before September 1st.</p>
+          <div className="mt-6">
+            <Link href="/rsvp/lookup">
+              <button className="btn btn-primary">Lookup Invite</button>
+            </Link>
+          </div>
+        </div>
+      </BodySection>
 
       <BodySection id="when" className="bg-sage">
         <SectionHeading heading="when" />

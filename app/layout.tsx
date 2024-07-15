@@ -22,8 +22,8 @@ export default function RootLayout({
 }) {
   return (
     <StateProvider>
-      <html lang="en" data-theme="autumn">
-        <body>
+      <html lang="en" data-theme="autumn" className="min-h-full">
+        <body className="min-h-full">
           <main
             className={` ${halloOysterFont.variable} ${montserratFont.variable} min-h-full text-xl text-black font-sans`}
           >
