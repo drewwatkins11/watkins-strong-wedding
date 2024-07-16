@@ -1,16 +1,10 @@
-import Head from "next/head";
 import Map, { Marker } from "react-map-gl";
+import "@/styles/mapbox.css";
 
 export default function MapOutput(props) {
   const { mapCenter, markers, mapStyle, initialViewState } = props;
   return (
     <>
-      <Head>
-        <link
-          href="https://api.tiles.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.css"
-          rel="stylesheet"
-        />
-      </Head>
       <Map
         mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
         initialViewState={
