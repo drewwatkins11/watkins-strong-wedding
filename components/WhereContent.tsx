@@ -11,34 +11,65 @@ import { faMapPin } from "@fortawesome/free-solid-svg-icons";
 
 const Map = dynamic(() => import("../components/Map"), { ssr: false });
 
+const blockClasses =
+  "bg-white mb-4 rounded-xl p-4 border-ember border-2  shadow-lg";
+
+const campingClasses = "mb-4 rounded-xl p-4 border-sage border-2  shadow-lg";
+
 const accomodations: {
   title: string;
+  featured?: boolean;
+  block?: boolean;
+  camping?: boolean;
   description: string;
   bookingLink?: string;
 }[] = [
   {
-    title: "Peek'n Peak",
+    title: "Holiday Inn Express",
+    featured: true,
+    block: true,
     description:
-      "Peak'n'Peak is the closest option for accomodations and has several options to choose from, including both hotel rooms and condos. They also have a spa and golf course. Blocks are not available and prices start around $229/night.",
+      "We have block of rooms reserved at the Holiday Inn in North East, PA for guests who are staying both Friday and Saturday. The hotel is about 20 minutes away and has a pool, slide, and hot tub. The group rate is $110/night for a king and $140/night for a king suite or double queen. For out-of-towners, is the most convenient option off Interstate 90. If you book by phone, our group code is SWG. At least 16 people must book rooms for the discouted rate to apply. The block expires on September 1st.",
     bookingLink:
-      "https://www.inntopia.travel/Ecomm/Shop/Lodging/2557220/en-US/?arrivaldate=2024-10-12&departuredate=2024-10-13&adultcount=2&childCount=0&childagearray=",
+      "https://www.ihg.com/holidayinnexpress/hotels/us/en/find-hotels/select-roomrate?fromRedirect=true&qSrt=sBR&qDest=Holiday%20Inn%20Express%20%26%20Suites%20North%20East%20(Erie%20I-90%20Exit%2041)&qErm=false&qSlH=neapa&qRms=1&qAdlt=2&qChld=0&qCiD=11&qCiMy=092024&qCoD=13&qCoMy=092024&qGrpCd=SWG&setPMCookies=true&qSHBrC=EX&qpMbw=0&qpMn=0&srb_u=1&qChAge=&qRmFltr=",
   },
   {
-    title: "Holiday Inn Express",
+    title: "Hampton Inn",
+    block: true,
     description:
-      "We're finalizing a block of rooms at the Holiday Inn in North East, PA. They're about 20 minutes away and have a pool, slide, and hot tub. Prices start around $140/night. For out-of-towners, is the most convenient option off Interstate 90.",
+      "We are finalizing a room block at the Hampton Inn in Erie, PA. The hotel is about 30 minutes away and has free breakfast. The group rate is $199/night for either a king w/ sleeper sofa or a double queen. Rooms will be held until September 11th. Our booking link will be added in the next few days.",
+  },
+  {
+    title: "Peek'n Peak",
+    description:
+      "Peak'n'Peak is the closest option for accomodations (~10 minutes) and has both hotel rooms and standalone condos. They also have a spa and golf course. A block was not available and prices start around $229/night.",
     bookingLink:
       "https://www.inntopia.travel/Ecomm/Shop/Lodging/2557220/en-US/?arrivaldate=2024-10-12&departuredate=2024-10-13&adultcount=2&childCount=0&childagearray=",
   },
   {
     title: "AirBnB",
     description:
-      "There are several AirBnb locations in the area, ranging from cabins to houses. You may also want to look at North East, PA, which has beautiful vineyards to enjoy on Sunday.",
+      "There are several AirBnb locations in the area, ranging from cabins to houses. You may also want to look near North East, PA; a quaint town surrounded by beautiful vineyards.",
     bookingLink:
       "https://www.airbnb.com/s/Wattsburg--Pennsylvania--United-States/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&flexible_trip_lengths%5B%5D=one_week&monthly_start_date=2024-07-01&monthly_length=3&monthly_end_date=2024-10-01&price_filter_input_type=0&channel=EXPLORE&query=Wattsburg%2C%20PA&place_id=ChIJA1i8YR2cMogREyrSeKJcoW0&location_bb=QigHacKfmo9CJ%2F7Uwp%2BgTw%3D%3D&date_picker_type=calendar&checkin=2024-10-12&checkout=2024-10-13&adults=2&source=structured_search_input_header&search_type=autocomplete_click",
   },
   {
-    title: "Tent Camping",
+    title: "Bison Trace Luxury Camping",
+    camping: true,
+    description:
+      "For a truely unique experience, Bison Trace offers cabins, covered wagons, and safari tents. It's about 10 minutes away, but is only available for two night stays. Priced $235-$245/night. Cabins and covered wagons are heated, but not the safari tents.",
+    bookingLink:
+      "https://www.campspot.com/book/bisontraceglamping/search/2024-10-11/2024-10-13/guests0,2,0/list",
+  },
+  {
+    title: "Pines Motel",
+    description: `The Pines Motel is a small, family-owned motel in North East, PA. It's about 20 minutes away and has rooms and cottages. Last we looked, a "Rock & Roll Sutie" was also available, complete with a record player! Prices start at $95/night for a queen room.`,
+    bookingLink:
+      "https://hotels.cloudbeds.com/en/reservation/EcfOwT/?currency=usd&checkin=2024-10-12&checkout=2024-10-13",
+  },
+  {
+    title: "Pitch a Tent",
+    camping: true,
     description:
       "You're welcome to pitch a tent in the field behind the lodge. We'd love to have you stay on site and not worry about transportation or what time you have to leave the party! (Sorry, no RVs permitted!)",
   },
@@ -185,27 +216,63 @@ export default function WhereContent() {
           style={{ top: "520px", right: "20px" }}
         />
       </div>
-      <div className="w-11/12 lg:w-full mx-auto bg-parchment p-8 rounded-2xl shadow-lg text-black mt-12">
+      <div className="w-11/12 lg:w-full mx-auto bg-snow p-8 rounded-2xl shadow-lg text-black mt-12">
         <h3 className="text-4xl lg:text-7xl mb-4 mt-0">Accomodations</h3>
         <p className="w-3/5 mx-auto">
           Accomodations are available at several area hotels. Here are the best
           options:
         </p>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-8 text-base w-11/12 mx-auto">
-          {accomodations.map((accomodation, index) => (
-            <div className="flex flex-col basis-5/12 mb-4" key={index}>
-              <h4 className="font-bold mb-2 text-xl">{accomodation.title}</h4>
-              <p>{accomodation.description}</p>
-              {accomodation.bookingLink && (
-                <a
-                  className="capitalize text-ember font-bold mt-2"
-                  href={accomodation.bookingLink}
-                >
-                  check availability
-                </a>
-              )}
-            </div>
-          ))}
+        <div
+          className="grid grid-cols-1 gap-4 mt-8 text-base w-11/12 mx-auto auto-rows-[1fr] lg:grid-cols-[1fr_1fr_1fr] grid-rows-[1fr_1fr]"
+          style={{
+            gridTemplateAreas: `"featuredHotel featuredHotel . "
+    ". . . "`,
+          }}
+        >
+          {accomodations
+            .filter((hotel) => hotel.featured)
+            .map((accomodation, index) => (
+              <div
+                className={`flex flex-col items-center justify-center ${blockClasses}`}
+                style={{ gridArea: "featuredHotel" }}
+                key={index}
+              >
+                <p className="font-bold text-wine">
+                  Featured Block: 2 Nights Required
+                </p>
+                <h4 className="font-bold mb-2 text-xl">{accomodation.title}</h4>
+                <p>{accomodation.description}</p>
+                {accomodation.bookingLink && (
+                  <a
+                    className="capitalize text-ember font-bold mt-2"
+                    href={accomodation.bookingLink}
+                  >
+                    check availability
+                  </a>
+                )}
+              </div>
+            ))}
+          {accomodations
+            .filter((hotel) => !hotel.featured)
+            .map((accomodation, index) => (
+              <div
+                className={`flex flex-col basis-5/12 mb-4 p-2 items-center justify-center ${
+                  accomodation.block && blockClasses
+                } ${accomodation.camping && campingClasses}`}
+                key={index}
+              >
+                <h4 className="font-bold mb-2 text-xl">{accomodation.title}</h4>
+                <p>{accomodation.description}</p>
+                {accomodation.bookingLink && (
+                  <a
+                    className="capitalize text-ember font-bold mt-2"
+                    href={accomodation.bookingLink}
+                  >
+                    check availability
+                  </a>
+                )}
+              </div>
+            ))}
         </div>
       </div>
     </div>
