@@ -12,7 +12,7 @@ const bios: {
     img: "ainsley_canoe_border.png",
     colorKey: "darkGreen",
     photoStyle: "lg:mt-12",
-    bio: `Born August 30th, 1995, Ainsley is a Michigander by birth and heart. She found herself in Erie after spending way too much money on her education. Now a badass doctor who only cries occasionally. Strong independent woman who "don't need no man, but somehow found a man". So here we are... She enjoys popcorn a little too much and believes chocolate is the only candy of importance, and dark chocolate is the best chocolate. Slightly obsessed with taking naps and playing in dirt.`,
+    bio: `Born August 30th, 1995, Ainsley is a Michigander by birth and heart. She found herself in Erie after spending way too much money on her education, but now she's living her dream of being a badass doctor. She has often referred to herself as "a strong independent woman who don't need no man" yet some she's found a man. Her simple joys in life are shared by Drew: popcorn, chocolate (especially the dark variety), playing in dirt, long form podcasts/audiobooks on road trips and adventures. But don't worry friends, although not always shared, her simplest joy still remains #1: the weekend afternoon nap.`,
   },
   {
     name: "Drew",
