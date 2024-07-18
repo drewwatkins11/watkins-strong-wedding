@@ -56,6 +56,9 @@ importers:
       react-map-gl:
         specifier: ^7.1.7
         version: 7.1.7(mapbox-gl@3.4.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      swiper:
+        specifier: ^11.1.5
+        version: 11.1.5
       tailwind-fontawesome:
         specifier: ^0.6.0
         version: 0.6.0(autoprefixer@10.4.19(postcss@8.4.38))(postcss@8.4.38)
@@ -2010,6 +2013,10 @@ packages:
   supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
+
+  swiper@11.1.5:
+    resolution: {integrity: sha512-JJQWFXdxiMGC2j6ZGTYat5Z7NN9JORJBgHp0/joX9uPod+cRj0wr5H5VnWSNIz9JeAamQvYKaG7aFrGHIF9OEg==}
+    engines: {node: '>= 4.7.0'}
 
   tailwind-fontawesome@0.6.0:
     resolution: {integrity: sha512-j8RV5co1jlGA0q6cK5/8VTj9g8c5/+7Pw4la/NM+8fP+xQJtl/7J4SLY8qRNn32D6cZsO/zbXAde6jwVi+wOiw==}
@@ -4265,6 +4272,8 @@ snapshots:
       has-flag: 4.0.0
 
   supports-preserve-symlinks-flag@1.0.0: {}
+
+  swiper@11.1.5: {}
 
   tailwind-fontawesome@0.6.0(autoprefixer@10.4.19(postcss@8.4.38))(postcss@8.4.38):
     dependencies:
