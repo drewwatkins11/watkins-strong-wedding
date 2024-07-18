@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import { Montserrat } from "next/font/google";
 import StateProvider from "./state-provider";
 
+import { Analytics } from "@vercel/analytics/react";
+
 const halloOysterFont = localFont({
   src: "../styles/fonts/halloOyster.otf",
   variable: "--font-oyster",
@@ -28,6 +30,7 @@ export default function RootLayout({
             className={` ${halloOysterFont.variable} ${montserratFont.variable} min-h-full text-xl text-black font-sans`}
           >
             {children}
+            <Analytics />
           </main>
         </body>
       </html>
