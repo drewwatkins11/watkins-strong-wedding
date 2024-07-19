@@ -1,7 +1,6 @@
 "use server";
 import type { PartialDeep } from "type-fest";
 import { notion } from "@/utils/notion/notion-client";
-import { processNotionResponse } from "./process";
 
 export const prepareForNotion = (inviteData: PartialDeep<Guest>) => {
   let properties = {};
@@ -9,6 +8,10 @@ export const prepareForNotion = (inviteData: PartialDeep<Guest>) => {
   // Update attendees
   if (inviteData.guestCount?.claimed) {
     properties["Accepted"] = { number: inviteData.guestCount.claimed };
+  }
+  console.log(inviteData.guestStatus);
+  if (inviteData.guestStatus) {
+    properties["Status"] = { select: { name: inviteData.guestStatus } };
   }
   if (inviteData.receptionOnly) {
     properties["Reception Only"] = { checkbox: inviteData.receptionOnly };
@@ -140,10 +143,6 @@ export const updateNotionPage = async ({
       properties,
     })
     .then((res) => {
-      // @ts-expect-error
-      // Notion doesn't include any keys except id and object (type) in their typing.
-      const notionResJSON: string = JSON.stringify(res.properties);
-      // return notionResJSON;
       return res;
     });
 

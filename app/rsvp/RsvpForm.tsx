@@ -13,6 +13,7 @@ import Complete from "./Complete";
 import { createStore, useStateMachine } from "little-state-machine";
 import { clearState, updateInvite } from "@/app/state-provider";
 import { signOut } from "next-auth/react";
+import { updateInvite as updateRSVP } from "../actions";
 
 const steps = ["Guests", "Food", "Extras", "Contact Details", "Add a Note"];
 export const extraTags: GuestTags[] = ["breakfast", "rehearsal dinner"];
@@ -46,13 +47,21 @@ export default function RsvpForm(props) {
     });
   }, [session]);
 
-  const onAdvance = (notionResponse: any, notAttending?: boolean) => {
+  const onAdvance = async (notionResponse: any, notAttending?: boolean) => {
     if (notionResponse) actions.updateInvite(notionResponse);
 
     if (notAttending) {
       setComplete(true);
+      state.inviteId &&
+        (await updateRSVP(state.inviteId, {
+          guestStatus: "Declined",
+        }));
     } else if (step === maxSteps) {
       setComplete(true);
+      state.inviteId &&
+        (await updateRSVP(state.inviteId, {
+          guestStatus: "Confirmed",
+        }));
     } else setStep(step + 1);
   };
 
