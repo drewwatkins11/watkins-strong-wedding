@@ -21,7 +21,7 @@ export const mustAttendBoth: GuestTags[] = ["close family", "wedding party"];
 export default function RsvpForm(props) {
   const { session }: { session: Session } = props;
 
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(0);
   const [complete, setComplete] = useState(false);
 
   const { actions, state } = useStateMachine({ updateInvite, clearState });
