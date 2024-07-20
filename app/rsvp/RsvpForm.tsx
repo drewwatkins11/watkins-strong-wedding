@@ -33,9 +33,10 @@ export default function RsvpForm(props) {
   );
 
   const visibleSteps = useMemo(() => {
-    if (!invitedToExtras)
-      return steps.filter((steps, index) => index !== steps.indexOf("Extras"));
-    return steps;
+    if (!invitedToExtras) {
+      const extrasIndex = steps.indexOf("Extras");
+      return steps.filter((steps, index) => index !== extrasIndex);
+    } else return steps;
   }, [invitedToExtras]);
 
   const maxSteps = visibleSteps.length - 1;
