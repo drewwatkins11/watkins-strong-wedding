@@ -115,7 +115,8 @@ export default function FoodChoice(props) {
           carving station with creamy horseradish and roasted red pepper coulis"
         </p>
         <p className="italic">
-          (and our months have been watering since we set the menu in February!)
+          (and our mounths have been watering since we set the menu in
+          February!)
         </p>
         <p className="!text-base">
           For those who have an aversion to beef, we will also be offering
