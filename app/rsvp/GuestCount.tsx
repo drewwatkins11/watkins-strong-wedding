@@ -42,7 +42,14 @@ export default function GuestCount(props) {
   const [isPending, startTransition] = useTransition();
 
   const updateAttending = (answer: boolean) => {
-    inviteDetails.guestCount.offered === 1 && updateGuestCount(1);
+    if (answer === true) {
+      inviteDetails.guestCount.offered === 1 && updateGuestCount(1);
+    } else {
+      updateGuestCount(0);
+      setPlusOnes(0);
+      setChildCount(0);
+    }
+
     setAttending(answer);
   };
 
