@@ -37,7 +37,9 @@ const accomodations: {
     title: "Hampton Inn",
     block: true,
     description:
-      "We are finalizing a room block at the Hampton Inn in Erie, PA. The hotel is about 30 minutes away and has free breakfast. The group rate is $199/night for either a king w/ sleeper sofa or a double queen. Rooms will be held until September 11th. Our booking link will be added in the next few days.",
+      "We have an additional room block at the Hampton Inn in Erie, PA. The hotel is about 30 minutes away and has free breakfast. The group rate is $199/night for either a king w/ sleeper sofa or a double queen. Rooms will be held until September 11th.",
+    bookingLink:
+      "https://www.hilton.com/en/book/reservation/deeplink/?ctyhocn=ERIHHHX&groupCode=CHHSWW&arrivaldate=2024-10-11&departuredate=2024-10-13&cid=OM,WW,HILTONLINK,EN,DirectLink&fromId=HILTONLINKDIRECT",
   },
   {
     title: "Peek'n Peak",
