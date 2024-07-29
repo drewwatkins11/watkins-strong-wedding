@@ -14,7 +14,7 @@ const Map = dynamic(() => import("../components/Map"), { ssr: false });
 const blockClasses =
   "bg-white mb-4 rounded-xl p-4 border-ember border-2  shadow-lg";
 
-const campingClasses = "mb-4 rounded-xl p-4 border-sage border-2  shadow-lg";
+const campingClasses = "mb-4 rounded-xl p-4 border-sage border-2 shadow-lg";
 
 const accomodations: {
   title: string;
@@ -70,10 +70,10 @@ const accomodations: {
       "https://hotels.cloudbeds.com/en/reservation/EcfOwT/?currency=usd&checkin=2024-10-12&checkout=2024-10-13",
   },
   {
-    title: "Pitch a Tent",
+    title: "Pitch a Tent/RV",
     camping: true,
     description:
-      "You're welcome to pitch a tent in the field behind the lodge. We'd love to have you stay on site and not worry about transportation or what time you have to leave the party! (Sorry, no RVs permitted!)",
+      "You're welcome to pitch a tent in the field behind the lodge or set up your (fully self supported... no hookups) RV in the parking lot. We'd love to have you stay on site and not worry about transportation or what time you have to leave the party!",
   },
 ];
 
