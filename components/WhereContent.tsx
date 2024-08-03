@@ -29,7 +29,7 @@ const accomodations: {
     featured: true,
     block: true,
     description:
-      "We have block of rooms reserved at the Holiday Inn in North East, PA for guests who are staying both Friday and Saturday. The hotel is about 20 minutes away and has a pool, slide, and hot tub. The group rate is $110/night for a king and $140/night for a king suite or double queen. For out-of-towners, is the most convenient option off Interstate 90. If you book by phone, our group code is SWG. At least 16 people must book rooms for the discouted rate to apply. The block expires on September 1st.",
+      "We have a block of rooms reserved at the Holiday Inn in North East, PA for guests who are staying both Friday and Saturday. The hotel is about 20 minutes away and has a pool, slide, and hot tub. The group rate is $110/night for a king and $140/night for a king suite or double queen. For out-of-towners, is the most convenient option off Interstate 90. If you book by phone, our group code is SWG. At least 16 people must book rooms for the discouted rate to apply. The block expires on September 1st.",
     bookingLink:
       "https://www.ihg.com/holidayinnexpress/hotels/us/en/find-hotels/select-roomrate?fromRedirect=true&qSrt=sBR&qDest=Holiday%20Inn%20Express%20%26%20Suites%20North%20East%20(Erie%20I-90%20Exit%2041)&qErm=false&qSlH=neapa&qRms=1&qAdlt=2&qChld=0&qCiD=11&qCiMy=092024&qCoD=13&qCoMy=092024&qGrpCd=SWG&setPMCookies=true&qSHBrC=EX&qpMbw=0&qpMn=0&srb_u=1&qChAge=&qRmFltr=",
   },
