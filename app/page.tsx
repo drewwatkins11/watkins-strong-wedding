@@ -4,9 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-regular-svg-icons";
 import WhereContent from "@/components/WhereContent";
 import WhoContent from "@/components/WhoContent";
-import RegistryContent from "@/components/RegistryContent";
+import UnderConstruction from "@/components/UnderConstruction";
 import { BodySection, SectionHeading } from "@/components/common";
 import RSVP from "./RSVP";
+import RegistryContent from "@/components/RegistryContent";
 
 export default async function Home() {
   return (
@@ -181,9 +182,12 @@ export default async function Home() {
         </div>
       </BodySection>
 
-      <BodySection id="registry" className="bg-wheat !pb-0 !px-0">
-        <SectionHeading heading="registry" color="text-ember" />
-        <div style={{ maxWidth: "1600px" }}>
+      <BodySection id="registry" className="!bg-burntOrange">
+        <SectionHeading heading="registry" color="text-wheat" />
+        <div
+          className="w-11/12 flex flex-col items-center"
+          style={{ maxWidth: "1600px" }}
+        >
           <RegistryContent />
         </div>
       </BodySection>
