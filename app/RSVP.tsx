@@ -72,7 +72,7 @@ export default function RSVP() {
       <div>
         <h4 className="text-2xl">To RSVP, start by looking up your invite.</h4>
         <p>Only one member of your party needs to RSVP.</p>
-        <p className="font-bold">Please RSVP before September 1st.</p>
+        <p className="font-bold">Please RSVP before September 10th.</p>
         <div className="mt-6">
           <Link href="/rsvp/lookup">
             <button className="btn btn-primary">Lookup Invite</button>
