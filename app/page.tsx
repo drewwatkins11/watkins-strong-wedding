@@ -4,10 +4,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-regular-svg-icons";
 import WhereContent from "@/components/WhereContent";
 import WhoContent from "@/components/WhoContent";
-import UnderConstruction from "@/components/UnderConstruction";
 import { BodySection, SectionHeading } from "@/components/common";
 import RSVP from "./RSVP";
 import RegistryContent from "@/components/RegistryContent";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Ainsley's and Drew's Wedding | Oct 12, 2024",
+};
 
 export default async function Home() {
   return (
